@@ -36,6 +36,7 @@ th, td {
 td{
     text-align:left;
     height:5px;
+    background-color:antiquewhite;
 }
  th{
      background-color:steelblue;
@@ -44,15 +45,47 @@ td{
      text-align:center;
  }
 .button {
-    color: steelblue;
-    padding: 20px;
+    color: black;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    background-color: steelblue;
     margin: 4px 2px;
+    display: inline-block;
+    font-size: 13px;
+    vertical-align: middle;
+    
 }
 .myform {
     text-align: center;
-
+    border: 1px solid black;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 50px;
+    margin-left: 50px;
+    background-color: lightblue;
+}
+#myForm {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+}
+label {
+    display: block;
+ 
+    text-align: right;
+    width:50px;
+    margin: 0 0 5px 0;
+}
+input {
+  
+    left: 50px;
+}
+{
 }
