@@ -1,3 +1,7 @@
+using System.Data;
+using System.Diagnostics.Eventing.Reader;
+using System.Windows.Forms;
+
 namespace Task1
 {
     public partial class Form1 : Form
@@ -7,7 +11,9 @@ namespace Task1
         {
             InitializeComponent();
 
-            studentList.Add(new StudentDetails { FirstName = "Guru", LastName = "Dev", Gender = "Male", DateOfBirth = new DateTime(2000, 1, 20), Age = 24, Class = "12", Address = "Nagpur" });
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.SteelBlue;
+
+            studentList.Add(new StudentDetails { FirstName = "Guru", LastName = "Dev", Gender = "Male", DateOfBirth = new DateTime(2000, 1, 20), Age = 24, Class = "8", Address = "Nagpur" });
             studentList.Add(new StudentDetails { FirstName = "Manish", LastName = "Varma", Gender = "Male", DateOfBirth = new DateTime(2008, 1, 20), Age = 19, Class = "12", Address = "Vardha" });
 
             foreach (var student in studentList)
@@ -24,6 +30,7 @@ namespace Task1
                 dataGridView1.Rows[0].Selected = true;
                 dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
             }
+
         }
         public Form1(List<StudentDetails> stdlist)
         {
@@ -65,6 +72,9 @@ namespace Task1
         private void Form1_Load(object sender, EventArgs e)
         {
             dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridView1.Rows[0].Selected = false;
+
         }
 
         private void addbutton_Click(object sender, EventArgs e)
@@ -76,28 +86,81 @@ namespace Task1
 
         private void textsearch_TextChanged(object sender, EventArgs e)
         {
-            string searchValue = textsearch.Text.Trim();
+            List<StudentDetails> studentsearch = new List<StudentDetails>();
+            StudentDetails Std = new StudentDetails();
 
-            if (!string.IsNullOrEmpty(searchValue))
+
+            string searchValue = textsearch.Text.ToLower();
+
+
+
+
+            foreach (var student in studentList)
             {
-                foreach (DataGridViewRow row in dataGridView1.Rows)
+                if (student.FirstName.ToLower().Contains(searchValue) ||
+                        student.LastName.ToLower().Contains(searchValue) ||
+                        student.Age.ToString().Contains(searchValue))
                 {
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        if (cell.Value != null && cell.Value.ToString().IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0)
-                        {
-                            row.Selected = true;
-                            dataGridView1.CurrentCell = cell;
-                            return;
-                        }
-                    }
+                    studentsearch.Add(student);
                 }
-                MessageBox.Show("No Matching record found.", "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            dataGridView1.Rows.Clear();
+            dataGridView1.Rows.Clear();
+            foreach (var student in studentsearch)
+            {
+                dataGridView1.Rows.Add(student.FirstName,
+
+                    student.LastName,
+                    student.Gender,
+                    student.Age,
+                    student.Class);
+
+            }
+
+
+        }
+
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            Panel p = sender as Panel;
+            ControlPaint.DrawBorder(e.Graphics, p.DisplayRectangle, Color.DarkBlue, ButtonBorderStyle.Solid);
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                // Unselect the previously selected row (optional)
+                if (dataGridView1.SelectedRows.Count > 0)
+                {
+                    dataGridView1.SelectedRows[0].DefaultCellStyle.BackColor = dataGridView1.DefaultCellStyle.BackColor;
+                    dataGridView1.SelectedRows[0].DefaultCellStyle.SelectionBackColor = dataGridView1.DefaultCellStyle.SelectionBackColor;
+                }
+
+                // Change the background color of the clicked row
+                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightBlue;
+                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+            }
+        }
+
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex == 0)
+            {
+                e.CellStyle.BackColor = Color.AntiqueWhite;
+                e.CellStyle.ForeColor = Color.Black;
             }
             else
             {
-                MessageBox.Show("Please enter a search value.", "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.CellStyle.BackColor = dataGridView1.DefaultCellStyle.BackColor;
+                e.CellStyle.ForeColor = dataGridView1.DefaultCellStyle.ForeColor;
             }
+        }
+        private void InitializeDataGridView()
+        {
+            dataGridView1.CellFormatting += dataGridView1_CellFormatting;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -105,15 +168,13 @@ namespace Task1
 
         }
 
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            Panel p = sender as Panel;
-            ControlPaint.DrawBorder(e.Graphics, p.DisplayRectangle, Color.DarkBlue,ButtonBorderStyle.Solid);
-        }
+        //private void dataGridView1_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        //{
+        //    if (e.RowIndex >= 2)
+        //    {
+        //        dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Red;
+        //        dataGridView1.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+        //    }
+        //}
     }
 }

@@ -1,0 +1,55 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<body>
+    <div>
+
+        <h1> OurStudent</h1>
+    </div>
+    <div>
+        
+       
+        <table id="tabledata" style="width:70%"  class="center">
+            <thead></thead>
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Class</th>
+
+
+            </tr>
+            </thead>
+            </tr>
+
+            <tr align="left">
+                <td>Rahul</td>
+                <td>Guri</td>
+                <td>Male</td>
+                <td>23</td>
+                <td>12th</td>
+
+
+            </tr>
+            <tr align="left">
+                <td>Shubham</td>
+                <td>Guru</td>
+                <td>Male</td>
+                <td>10</td>
+                <td>7th Class</td>
+            </tr>
+            <tbody id="tablebody">
+
+            </tbody>
+        </table>
+        <button class="button" type="button" style="float:right">
+            <a asp-page="/OurStudent">OurStudent</a>
+        </button>
+    </div>
+
+    
+</body>
+

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace Task1
     public  class StudentDetails
     {
         private string firstName;
+       
         public string FirstName
         {
             get { return firstName; }
@@ -17,7 +19,7 @@ namespace Task1
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                   
+                  
                 }
                 if (value.Length < 3 || value.Length > 15)
                 {
@@ -26,7 +28,7 @@ namespace Task1
                 firstName = value;
             }
         }
-                  
+                 
         public string LastName { get; set; }
         public string Gender {  get; set; } 
         public DateTime DateOfBirth { get; set; }

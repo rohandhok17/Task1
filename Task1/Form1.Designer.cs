@@ -28,17 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             groupBox1 = new GroupBox();
-            label1 = new Label();
-            addbutton = new Button();
-            textsearch = new TextBox();
             panel1 = new Panel();
+            addbutton = new Button();
+            label1 = new Label();
+            textsearch = new TextBox();
             dataGridView1 = new DataGridView();
             firstname = new DataGridViewTextBoxColumn();
             lastname = new DataGridViewTextBoxColumn();
             gender = new DataGridViewTextBoxColumn();
             age = new DataGridViewTextBoxColumn();
             Class = new DataGridViewTextBoxColumn();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -46,32 +48,31 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(addbutton);
-            groupBox1.Controls.Add(textsearch);
             groupBox1.Controls.Add(panel1);
-            groupBox1.Location = new Point(340, 63);
+            groupBox1.Location = new Point(346, 176);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(950, 652);
+            groupBox1.Size = new Size(950, 517);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Enter += groupBox1_Enter;
             // 
-            // label1
+            // panel1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(345, 106);
-            label1.Name = "label1";
-            label1.Size = new Size(253, 54);
-            label1.TabIndex = 5;
-            label1.Text = "Our Student ";
+            panel1.Controls.Add(addbutton);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(textsearch);
+            panel1.Controls.Add(dataGridView1);
+            panel1.Location = new Point(27, 30);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(892, 449);
+            panel1.TabIndex = 6;
+            panel1.Paint += panel1_Paint;
             // 
             // addbutton
             // 
             addbutton.BackColor = Color.SteelBlue;
             addbutton.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            addbutton.Location = new Point(765, 263);
+            addbutton.Location = new Point(741, 107);
             addbutton.Name = "addbutton";
             addbutton.Size = new Size(112, 50);
             addbutton.TabIndex = 3;
@@ -79,37 +80,49 @@
             addbutton.UseVisualStyleBackColor = false;
             addbutton.Click += addbutton_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(302, 46);
+            label1.Name = "label1";
+            label1.Size = new Size(253, 54);
+            label1.TabIndex = 5;
+            label1.Text = "Our Student ";
+            // 
             // textsearch
             // 
+            textsearch.BorderStyle = BorderStyle.FixedSingle;
             textsearch.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textsearch.Location = new Point(577, 268);
+            textsearch.Location = new Point(567, 113);
             textsearch.Name = "textsearch";
             textsearch.PlaceholderText = " Search..";
             textsearch.Size = new Size(150, 39);
             textsearch.TabIndex = 4;
             textsearch.TextChanged += textsearch_TextChanged;
             // 
-            // panel1
-            // 
-            panel1.Controls.Add(dataGridView1);
-            panel1.Location = new Point(24, 25);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(900, 600);
-            panel1.TabIndex = 6;
-            panel1.Paint += panel1_Paint;
-            // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
+            dataGridView1.AllowUserToResizeColumns = false;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { firstname, lastname, gender, age, Class });
-            dataGridView1.Location = new Point(37, 326);
+            dataGridView1.Location = new Point(37, 178);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 62;
+            dataGridViewCellStyle1.ForeColor = Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(230, 240, 167);
+            dataGridViewCellStyle1.SelectionForeColor = Color.Black;
+            dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.Size = new Size(816, 230);
             dataGridView1.TabIndex = 1;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
+            dataGridView1.CellFormatting += dataGridView1_CellFormatting;
             // 
             // firstname
             // 
@@ -150,11 +163,11 @@
             MinimumSize = new Size(1300, 800);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Our Student";
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
@@ -165,12 +178,13 @@
         private Button addbutton;
         private TextBox textsearch;
         private DataGridView dataGridView1;
+        private Label label1;
+        private Panel panel1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private DataGridViewTextBoxColumn firstname;
         private DataGridViewTextBoxColumn lastname;
         private DataGridViewTextBoxColumn gender;
         private DataGridViewTextBoxColumn age;
         private DataGridViewTextBoxColumn Class;
-        private Label label1;
-        private Panel panel1;
     }
 }
