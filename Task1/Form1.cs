@@ -10,7 +10,8 @@ namespace Task1
         public Form1()
         {
             InitializeComponent();
-
+            
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.SteelBlue;
 
             studentList.Add(new StudentDetails { FirstName = "Guru", LastName = "Dev", Gender = "Male", DateOfBirth = new DateTime(2000, 1, 20), Age = 24, Class = "8", Address = "Nagpur" });
@@ -22,8 +23,7 @@ namespace Task1
             }
             if (dataGridView1.Rows.Count > 2)
             {
-                dataGridView1.Rows[2].Selected = true;
-                dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                
             }
             if (dataGridView1.Rows.Count > 0)
             {
@@ -48,6 +48,13 @@ namespace Task1
 
 
             }
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.SteelBlue;
+            if (dataGridView1.Rows.Count > 0)
+            {
+                dataGridView1.Rows[0].Selected = true;
+                dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells[0];
+            }
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -71,9 +78,9 @@ namespace Task1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dataGridView1.EnableHeadersVisualStyles = false;
+            dataGridView1.EnableHeadersVisualStyles =false;
             dataGridView1.CellClick += dataGridView1_CellClick;
-            dataGridView1.Rows[0].Selected = false;
+            //dataGridView1.Rows[0].Selected = false;
 
         }
 
@@ -140,27 +147,27 @@ namespace Task1
                 }
 
                 // Change the background color of the clicked row
-                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightBlue;
-                dataGridView1.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightBlue;
+                  //dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.YellowGreen;
+            //    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightBlue;
             }
         }
 
-        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.RowIndex == 0)
-            {
-                e.CellStyle.BackColor = Color.AntiqueWhite;
-                e.CellStyle.ForeColor = Color.Black;
-            }
-            else
-            {
-                e.CellStyle.BackColor = dataGridView1.DefaultCellStyle.BackColor;
-                e.CellStyle.ForeColor = dataGridView1.DefaultCellStyle.ForeColor;
-            }
-        }
+        //private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        //{
+        //    if (e.RowIndex == 0)
+        //    {
+        //        e.CellStyle.BackColor = Color.AntiqueWhite;
+        //        e.CellStyle.ForeColor = Color.Black;
+        //    }
+        //    else
+        //    {
+        //        e.CellStyle.BackColor = dataGridView1.DefaultCellStyle.BackColor;
+        //        e.CellStyle.ForeColor = dataGridView1.DefaultCellStyle.ForeColor;
+        //    }
+        //}
         private void InitializeDataGridView()
         {
-            dataGridView1.CellFormatting += dataGridView1_CellFormatting;
+           // dataGridView1.CellFormatting += dataGridView1_CellFormatting;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

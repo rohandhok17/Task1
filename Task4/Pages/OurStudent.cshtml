@@ -28,7 +28,7 @@
             </div>
             <div>
                 <label for="age">Age</label>
-                <input type="text" id="age" name="age"> <br>
+                <input type="number" id="age" name="age"> <br>
             </div>
             <div>
                 <label for="class">Class</label>
@@ -41,8 +41,9 @@
 
             <br>
             <div>
-                <input type="submit" value="Submit" onclick="submitform">
-            </div>
+                <button type="button" id="Button1" OnClick="submitform">Submit</button>
+                <asp:Button id="Button1" Text="Submit" OnClick="submitform()"  runat="server" Visible="true" />
+             </div>   
 
 
         </form>

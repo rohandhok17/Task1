@@ -62,7 +62,7 @@ namespace Task1
             //textBox2.Text = "PLease enter Address";
             //dateTimePicker1.Value = DateTime.Today;
             this.Hide();
-            Form1 form1 = new Form1();
+            Form1 form1 = new Form1(StudentDetailsList);
             form1.Show();
         }
 
@@ -81,21 +81,22 @@ namespace Task1
                     First.Text = "This Field is Required";
                     First.ForeColor = Color.Red;
                 }
-                if(firstname.Contains("  ") )
+                else if(firstname.Contains("  "))
                 {
                     First.Text = "First Name must be between 3 and 18 characters.";
                     First.ForeColor = Color.Red;
                 }
              
-                else
+                else if(firstname.Length < 3 || firstname.Length > 18)
                 {
                     First.Text = "First Name must be between 3 and 18 characters.";
                     First.ForeColor = Color.Red;
+                    
                 }
             }
             else
             {
-                First.Text = "";
+                First.Text =string.Empty;
             }
 
             if (string.IsNullOrWhiteSpace(lastname) || lastname.Length < 2 ||
@@ -106,17 +107,22 @@ namespace Task1
                     Last.Text = "This Field is Required";
                     Last.ForeColor = Color.Red;
                 }
-                if (lastname.Contains("  "))
+                else if (lastname.Contains("  "))
                 {
                     Last.Text = "Last Name must be between 2 and 18 characters.";
                     Last.ForeColor = Color.Red;
                 }
 
-                else
+                else if(lastname.Length < 2 ||lastname.Length > 18)
                 {
                     Last.Text = "Last Name must be between 2 and 18 characters.";
                     Last.ForeColor = Color.Red;
                 }
+               
+            }
+            else
+            {
+                Last.Text = string.Empty;
             }
 
             if (string.IsNullOrWhiteSpace(txtcombo.Text) || txtcombo.Text != "Male" && txtcombo.Text != "Female" && txtcombo.Text != "Other")
@@ -129,48 +135,58 @@ namespace Task1
                 }
                 else
                 {
-                    Gender.Text = "Please select valid data";
-                    Gender.ForeColor = Color.Red;
+                    Gender.Text = string.Empty;
                 }
             }
             else
             {
-                Gender.Text = "";
+                Gender.Text = string.Empty;
+              
             }
 
-            DateTime Time1 = dateTimePicker1.Value.Date;
-            //if Age should be between 5 to 99 years
-            if (!int.TryParse(txt_age.Text, out int age) || age < 5 || age > 99 && age == 0 && dateTimePicker1.Value.Date >= Time1)
+
+            //DateTime Time1 = dateTimePicker1.Value.Date;
+            DateTime Time1 = DateTime.Today;
+            if ( dateTimePicker1.Value.Date >= Time1)
             {
-                if (age == 0 && dateTimePicker1.Value.Date >= Time1)
+                Date.Text = "This field is required";
+                Date.ForeColor = Color.Red;
+            }
+            else
+            {
+                Date.Text = string.Empty;
+                Date.Text = string.Empty;
+            }
+
+
+            //if Age should be between 5 to 99 years
+            if (!int.TryParse(txt_age.Text, out int age) || age < 5 || age > 99 )
+            {
+                if (age == 0)
                 {
-                    Date.Text = "This field is required";
-                    Date.ForeColor = Color.Red;
+                   
 
                 }
                 else
                 {
-                    //Date.Text = "Age must be in between 5 to 99";
-                    Date.ForeColor = Color.Red;
+                    //Date.Text = "";
+                    ////Date.Text = "Age must be in between 5 to 99";
+                    //Date.ForeColor = Color.Red;
                     return;
                 }
             }
-            else
-            {
-                Date.Text = "";
-                Date.Text = "";
-            }
+           
 
             if (string.IsNullOrWhiteSpace(txt_age.Text))
             {
                 Age.Text = "This Field is Required";
                 Age.ForeColor = Color.Red;
             }
-            if (dateTimePicker1.Value == DateTimePicker.MinimumDateTime)
-            {
-                Date.Text = "This Field is Required";
-                Date.ForeColor = Color.Red;
-            }
+            //if (dateTimePicker1.Value == DateTimePicker.MinimumDateTime)
+            //{
+            //    Date.Text = "This Field is Required";
+            //    Date.ForeColor = Color.Red;
+            //}
             if (string.IsNullOrWhiteSpace(firstname) || firstname.Length < 3 || firstname.Length > 15 || firstname.Contains("  ")||
               string.IsNullOrWhiteSpace(lastname) || lastname.Length < 2 || lastname.Length > 18 || lastname.Contains("  ") ||
                  string.IsNullOrWhiteSpace(txtcombo.Text) || txtcombo.Text != "Male" && txtcombo.Text != "Female" && txtcombo.Text != "Other" ||
@@ -266,12 +282,12 @@ namespace Task1
                         dateTimePicker1.Value = birthDate;
                         Age.Text = string.Empty;
                     }
-                    else
-                    {
-                        Age.Text = "Age must be\n between 5 and 99.";
-                        Age.ForeColor = Color.Red;
+                    //else
+                    //{
+                    //    Age.Text = "Age must be\n between 5 and 99.";
+                    //    Age.ForeColor = Color.Red;
 
-                    }
+                    //}
                 }
 
 
@@ -321,27 +337,21 @@ namespace Task1
         {
             string firstName = txt_firstname.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(firstName))
+            if (string.IsNullOrWhiteSpace(firstName) || firstName.EndsWith(" "))
             {
                 First.Text = "This Field is Required";
                 First.ForeColor = Color.Red;
                 return;
             }
 
-            if (firstName.Length < 3 || firstName.Length > 15 || firstName.EndsWith(" "))
+            if (firstName.Length < 3 || firstName.Length > 18 )
             {
-                First.Text = "First Name must be between 3 and 15 characters";
+                First.Text = "First Name must be between 3 and 18 characters.";
                 First.ForeColor = Color.Red;
                 return;
 
             }
-            //if(firstName.StartsWith(" ") || firstName.StartsWith(" "))
-            //{
-            //    First.Text = "First Name must be between 3 and 15 characters";
-            //    First.ForeColor = Color.Red;
-            //    return;
-            //}
-
+            else
             First.Text = "";
          
 
@@ -364,18 +374,35 @@ namespace Task1
             }
             if (lastName.Length < 2 || lastName.Length > 18 || lastName.EndsWith(" "))
             {
-                Last.Text = "Last Name Must be between 2 and 15 characters";
+                Last.Text = "Last Name must be between 2 and 18 characters.";
                 Last.ForeColor = Color.Red;
                 return;
             }
-           
+           else
             Last.Text = "";
         }
 
         private void txtcombo_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            if (string.IsNullOrWhiteSpace(txtcombo.Text) || txtcombo.Text != "Male" && txtcombo.Text != "Female" && txtcombo.Text != "Other")
+            {
+                if (string.IsNullOrWhiteSpace(txtcombo.Text))
+                {
+                    Gender.Text = "This field is required";
+                    Gender.ForeColor = Color.Red;
+                    //return;
+                }
+                else
+                {
+                    Gender.Text = string.Empty;
+                }
+            }
+            else
+            {
+                Gender.Text = string.Empty;
 
+            }
 
 
         }

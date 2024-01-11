@@ -59,14 +59,20 @@ td{
 .myform {
     text-align: center;
     border: 1px solid black;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-right: 50px;
-    margin-left: 50px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 100px;
+    margin-left: 100px;
     background-color: lightblue;
 }
 #myForm {
-    height: 100%;
+    vertical-align: middle;
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+    
+    /*height: 100%;
     width: 100%;
     display: flex;
     display: inline-block;
@@ -74,18 +80,54 @@ td{
     padding-top: 50px;
     padding-right: 30px;
     padding-bottom: 50px;
-    padding-left: 80px;
+    padding-left: 80px;*/
 }
 label {
-    display: block;
- 
-    text-align: right;
-    width:50px;
-    margin: 0 0 5px 0;
+    float:left;
 }
-input {
+input, select,textarea {
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 40%;
+    
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.myform {
+    flex-direction: column;
   
-    left: 50px;
+    margin: 20px auto;
+    padding: 20px;
+    
+
+label {
+    width: 30%;
+    text-align:left;
+   
 }
-{
+
+
+textarea {
+   
+   margin-bottom:10px;
+  margin:20px;
+
 }
+ input ,select {
+    padding :10px;
+    margin-bottom:30px;
+}
+ .address{
+     
+     
+ }

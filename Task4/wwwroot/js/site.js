@@ -7,17 +7,17 @@
     var classVal = document.getElementById("class").value;
     var address = document.getElementById("address").value;
 
-    console.log("First Name: " + fname);
-    console.log("Last Name: " + lname);
-    console.log("Gender: " + gender);
-    console.log("Date of Birth: " + dateofbirth);
-    console.log("Age: " + age);
-    console.log("Class: " + classVal);
-    console.log("Address: " + address);
+    var row = table.insertRow(1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
+    var cell6 = row.insertCell(5);
+    var cell7 = row.insertCell(6);
+
+    cell1.innerHTMl = firstname;
+    cell1.innerHTMl = lastname;
+    
+
 }
-let form = document.getElementById("formsave");
-let table = document.getElementById("tabledata");
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    submit();
-})

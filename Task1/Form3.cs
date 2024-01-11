@@ -86,7 +86,7 @@ namespace Task1
                 }
                 else
                 {
-                    first1.Text = "First Name must be between 3 and 18 characters.";
+                    first1.Text = "This Field is Required";
                     first1.ForeColor = Color.Red;
                 }
 
@@ -113,7 +113,7 @@ namespace Task1
 
                 else
                 {
-                    last1.Text = "Last Name must be between 2 and 18 characters.";
+                    last1.Text = "This Field is Required";
                     last1.ForeColor = Color.Red;
                 }
             }
@@ -348,16 +348,17 @@ namespace Task1
 
         private void txt_firstname_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txt_firstname.Text))
+            string firstName = txt_firstname.Text.Trim();
+            if (string.IsNullOrWhiteSpace(firstName))
             {
                 first1.Text = "This Field is Required";
                 first1.ForeColor = Color.Red;
                 return;
             }
 
-            if (txt_firstname.Text.Length < 3 || txt_firstname.Text.Length > 15)
+            if (firstName.Length < 3 || firstName.Length > 15)
             {
-                first1.Text = "First Name must be between 3 and 15 characters";
+                first1.Text = "First Name must be between 3 and 18 characters";
                 first1.ForeColor = Color.Red;
                 return;
 
@@ -369,15 +370,16 @@ namespace Task1
 
         private void txt_lastname_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txt_lastname.Text))
+            string lastName = txt_lastname.Text.Trim();
+            if (string.IsNullOrWhiteSpace(lastName))
             {
                 last1.Text = "This Field is Required";
                 last1.ForeColor = Color.Red;
                 return;
             }
-            if (txt_lastname.Text.Length < 3 || txt_lastname.Text.Length > 18)
+            if (lastName.Length < 2 || lastName.Length > 18 || lastName.EndsWith(""))
             {
-                last1.Text = "Last Name Must be between 3 and 15 characters";
+                last1.Text = "Last Name Must be between 2 and 18 characters";
                 last1.ForeColor = Color.Red;
                 return;
             }
