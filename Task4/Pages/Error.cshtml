@@ -24,3 +24,51 @@
     For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
     and restarting the app.
 </p>
+
+
+
+<div> <h2>HTML Forms</h2></div>
+<script src="site.js"></script>
+<div class="myform" id="myForm">
+    <form action="#" id="formsave" method="get">
+        <div>
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" placeholder="Enter your first Name"><br>
+        </div>
+        <div>
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" placeholder="Enter your first Name"><br>
+        </div>
+        <div>
+            <label for="gender">Gender</label>
+            <select name="gender" id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select> <br>
+        </div>
+        <div>
+            <label for="birthday">Date of Birth</label>
+            <input type="date" id="dateofbirth" name="dateofbirth">
+        </div>
+        <div>
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age"> <br>
+        </div>
+        <div>
+            <label for="class">Class</label>
+            <input type="text" id="class" name="class" placeholder="Enter you Class"><br>
+        </div>
+        <div>
+            <label for="address">Address</label>
+            <textarea id="address" name="address" placeholder="Enter you Address"></textarea>
+        </div>
+
+        <br>
+        <div>
+            <button type="button" id="Button1" OnClick="submitform">Submit</button>
+            <asp:Button id="Button1" Text="Submit" OnClick="submitform()" runat="server" Visible="true" />
+        </div>
+
+
+    </form>

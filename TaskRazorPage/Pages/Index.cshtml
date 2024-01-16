@@ -1,0 +1,67 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>OurStudent</p>
+</div>
+<div class="myform" id="myForm">
+
+
+    <form  id="formsave" method="post">
+        <div>
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="UserName" placeholder="Enter your first Name"><br>
+        </div>
+        <div>
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="Password" placeholder="Enter your first Name"><br>
+        </div>
+        <div>
+            <label for="gender">Gender</label>
+            <select name="gender" id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select> <br>
+        </div>
+        <div>
+            <label for="birthday">Date of Birth</label>
+            <input type="date" id="dateofbirth" name="dateofbirth">
+        </div>
+        <div>
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age"> <br>
+        </div>
+        <div>
+            <label for="class">Class</label>
+            <input type="text" id="class" name="class" placeholder="Enter you Class"><br>
+        </div>
+        <div>
+            <label for="address">Address</label>
+            <textarea id="address" name="address" placeholder="Enter you Address"></textarea>
+        </div>
+
+        <br>
+        <div>
+            <button type="submit" id="Button1">Submit</button>
+            @if (Model.IsError)
+            {
+                <p style="color:red">firstname and lastname</p>
+            }
+        </div>
+
+
+    </form>
+
+
+
+
+
+
+
+
+</div>

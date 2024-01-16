@@ -67,7 +67,7 @@
             // 
             label23.AutoSize = true;
             label23.ForeColor = Color.Red;
-            label23.Location = new Point(532, 319);
+            label23.Location = new Point(518, 314);
             label23.Name = "label23";
             label23.Size = new Size(20, 25);
             label23.TabIndex = 73;
@@ -77,7 +77,7 @@
             // 
             buttoncancel.BackColor = SystemColors.ActiveBorder;
             buttoncancel.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            buttoncancel.Location = new Point(553, 610);
+            buttoncancel.Location = new Point(531, 614);
             buttoncancel.Name = "buttoncancel";
             buttoncancel.Size = new Size(144, 55);
             buttoncancel.TabIndex = 61;
@@ -90,7 +90,7 @@
             buttondelete.BackColor = SystemColors.ActiveBorder;
             buttondelete.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             buttondelete.ForeColor = Color.Red;
-            buttondelete.Location = new Point(65, 610);
+            buttondelete.Location = new Point(65, 614);
             buttondelete.Name = "buttondelete";
             buttondelete.Size = new Size(144, 55);
             buttondelete.TabIndex = 59;
@@ -102,7 +102,7 @@
             // 
             label12.AutoSize = true;
             label12.ForeColor = Color.Red;
-            label12.Location = new Point(200, 317);
+            label12.Location = new Point(200, 316);
             label12.Name = "label12";
             label12.Size = new Size(20, 25);
             label12.TabIndex = 72;
@@ -112,7 +112,7 @@
             // 
             label13.AutoSize = true;
             label13.ForeColor = Color.Red;
-            label13.Location = new Point(182, 174);
+            label13.Location = new Point(166, 176);
             label13.Name = "label13";
             label13.Size = new Size(20, 25);
             label13.TabIndex = 71;
@@ -122,7 +122,7 @@
             // 
             label14.AutoSize = true;
             label14.ForeColor = Color.Red;
-            label14.Location = new Point(184, 248);
+            label14.Location = new Point(146, 245);
             label14.Name = "label14";
             label14.Size = new Size(20, 25);
             label14.TabIndex = 70;
@@ -132,7 +132,7 @@
             // 
             label15.AutoSize = true;
             label15.ForeColor = Color.Red;
-            label15.Location = new Point(192, 100);
+            label15.Location = new Point(174, 100);
             label15.Name = "label15";
             label15.Size = new Size(20, 25);
             label15.TabIndex = 69;
@@ -166,7 +166,7 @@
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.PlaceholderText = "Please enter address";
-            textBox2.Size = new Size(462, 122);
+            textBox2.Size = new Size(440, 122);
             textBox2.TabIndex = 58;
             // 
             // txt_class
@@ -176,8 +176,9 @@
             txt_class.Margin = new Padding(4);
             txt_class.Name = "txt_class";
             txt_class.PlaceholderText = "Please enter class";
-            txt_class.Size = new Size(210, 31);
+            txt_class.Size = new Size(220, 31);
             txt_class.TabIndex = 57;
+            txt_class.TextChanged += txt_class_TextChanged;
             // 
             // label18
             // 
@@ -193,21 +194,21 @@
             // txt_age
             // 
             txt_age.BorderStyle = BorderStyle.FixedSingle;
-            txt_age.Location = new Point(565, 318);
+            txt_age.Location = new Point(552, 315);
             txt_age.Margin = new Padding(4);
             txt_age.Name = "txt_age";
-            txt_age.Size = new Size(46, 31);
+            txt_age.Size = new Size(68, 31);
             txt_age.TabIndex = 56;
             txt_age.TextChanged += txt_age_TextChanged;
             // 
             // label19
             // 
             label19.AutoSize = true;
-            label19.Font = new Font("Segoe UI", 12F);
-            label19.Location = new Point(485, 320);
+            label19.Font = new Font("Segoe UI", 11F);
+            label19.Location = new Point(475, 315);
             label19.Margin = new Padding(4, 0, 4, 0);
             label19.Name = "label19";
-            label19.Size = new Size(56, 32);
+            label19.Size = new Size(52, 30);
             label19.TabIndex = 65;
             label19.Text = "Age";
             // 
@@ -228,7 +229,7 @@
             dateTimePicker1.Location = new Point(235, 315);
             dateTimePicker1.Margin = new Padding(4);
             dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(233, 31);
+            dateTimePicker1.Size = new Size(220, 31);
             dateTimePicker1.TabIndex = 55;
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
             dateTimePicker1.Validating += dateTimePicker1_Validating;
@@ -238,10 +239,10 @@
             txtcombo.DropDownStyle = ComboBoxStyle.DropDownList;
             txtcombo.FormattingEnabled = true;
             txtcombo.Items.AddRange(new object[] { "Male", "Female", "Other" });
-            txtcombo.Location = new Point(235, 245);
+            txtcombo.Location = new Point(238, 245);
             txtcombo.Margin = new Padding(4);
             txtcombo.Name = "txtcombo";
-            txtcombo.Size = new Size(233, 33);
+            txtcombo.Size = new Size(220, 33);
             txtcombo.TabIndex = 54;
             txtcombo.SelectedIndexChanged += txtcombo_SelectedIndexChanged;
             // 
@@ -271,7 +272,7 @@
             // 
             buttonsave.BackColor = SystemColors.Highlight;
             buttonsave.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            buttonsave.Location = new Point(396, 610);
+            buttonsave.Location = new Point(382, 614);
             buttonsave.Margin = new Padding(4);
             buttonsave.Name = "buttonsave";
             buttonsave.Size = new Size(144, 55);
@@ -287,7 +288,7 @@
             txt_lastname.Margin = new Padding(4);
             txt_lastname.Name = "txt_lastname";
             txt_lastname.PlaceholderText = "Please enter Last Name";
-            txt_lastname.Size = new Size(462, 31);
+            txt_lastname.Size = new Size(440, 31);
             txt_lastname.TabIndex = 53;
             txt_lastname.TextChanged += txt_lastname_TextChanged;
             txt_lastname.KeyPress += txt_lastname_KeyPress;
@@ -298,8 +299,8 @@
             txt_firstname.Location = new Point(239, 100);
             txt_firstname.Margin = new Padding(4);
             txt_firstname.Name = "txt_firstname";
-            txt_firstname.PlaceholderText = "Please enter  First name";
-            txt_firstname.Size = new Size(462, 31);
+            txt_firstname.PlaceholderText = "Please enter First name";
+            txt_firstname.Size = new Size(440, 31);
             txt_firstname.TabIndex = 52;
             txt_firstname.TextChanged += txt_firstname_TextChanged;
             txt_firstname.KeyPress += txt_firstname_KeyPress;
@@ -335,9 +336,9 @@
             groupBox2.Controls.Add(label18);
             groupBox2.Controls.Add(txt_class);
             groupBox2.Controls.Add(txt_age);
-            groupBox2.Location = new Point(21, 14);
+            groupBox2.Location = new Point(18, 15);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(756, 691);
+            groupBox2.Size = new Size(753, 691);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
             groupBox2.Enter += groupBox2_Enter;
@@ -345,7 +346,7 @@
             // Age
             // 
             Age.AutoSize = true;
-            Age.Location = new Point(559, 352);
+            Age.Location = new Point(544, 352);
             Age.Name = "Age";
             Age.Size = new Size(21, 25);
             Age.TabIndex = 86;
@@ -375,7 +376,7 @@
             // Gender
             // 
             Gender.AutoSize = true;
-            Gender.Location = new Point(230, 280);
+            Gender.Location = new Point(232, 280);
             Gender.Name = "Gender";
             Gender.Size = new Size(23, 25);
             Gender.TabIndex = 84;
@@ -384,7 +385,7 @@
             // Last
             // 
             Last.AutoSize = true;
-            Last.Location = new Point(230, 210);
+            Last.Location = new Point(232, 210);
             Last.Name = "Last";
             Last.Size = new Size(16, 25);
             Last.TabIndex = 83;
@@ -393,7 +394,7 @@
             // First
             // 
             First.AutoSize = true;
-            First.Location = new Point(230, 134);
+            First.Location = new Point(232, 134);
             First.Name = "First";
             First.Size = new Size(18, 25);
             First.TabIndex = 82;
@@ -402,18 +403,19 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(614, 327);
+            label3.Location = new Point(625, 324);
             label3.Name = "label3";
             label3.Size = new Size(53, 25);
             label3.TabIndex = 81;
             label3.Text = "years";
+            label3.Click += label3_Click;
             // 
             // panel1
             // 
             panel1.Controls.Add(groupBox2);
-            panel1.Location = new Point(300, 91);
+            panel1.Location = new Point(300, 109);
             panel1.Name = "panel1";
-            panel1.Size = new Size(800, 724);
+            panel1.Size = new Size(789, 724);
             panel1.TabIndex = 2;
             panel1.Paint += panel1_Paint;
             // 

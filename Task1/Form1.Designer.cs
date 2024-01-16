@@ -52,7 +52,7 @@
             groupBox1.Controls.Add(panel1);
             groupBox1.Location = new Point(346, 176);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(950, 517);
+            groupBox1.Size = new Size(950, 479);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Enter += groupBox1_Enter;
@@ -65,15 +65,15 @@
             panel1.Controls.Add(dataGridView1);
             panel1.Location = new Point(27, 30);
             panel1.Name = "panel1";
-            panel1.Size = new Size(892, 449);
+            panel1.Size = new Size(892, 418);
             panel1.TabIndex = 6;
             panel1.Paint += panel1_Paint;
             // 
             // addbutton
             // 
             addbutton.BackColor = Color.SteelBlue;
-            addbutton.Font = new Font("Segoe UI", 11F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            addbutton.Location = new Point(741, 107);
+            addbutton.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            addbutton.Location = new Point(741, 86);
             addbutton.Name = "addbutton";
             addbutton.Size = new Size(112, 50);
             addbutton.TabIndex = 3;
@@ -85,7 +85,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 20F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(302, 46);
+            label1.Location = new Point(318, 22);
             label1.Name = "label1";
             label1.Size = new Size(253, 54);
             label1.TabIndex = 5;
@@ -94,11 +94,11 @@
             // textsearch
             // 
             textsearch.BorderStyle = BorderStyle.FixedSingle;
-            textsearch.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textsearch.Location = new Point(567, 113);
+            textsearch.Font = new Font("Segoe UI", 11F);
+            textsearch.Location = new Point(568, 92);
             textsearch.Name = "textsearch";
             textsearch.PlaceholderText = " Search..";
-            textsearch.Size = new Size(150, 39);
+            textsearch.Size = new Size(150, 37);
             textsearch.TabIndex = 4;
             textsearch.TextChanged += textsearch_TextChanged;
             // 
@@ -120,7 +120,7 @@
             dataGridViewCellStyle1.SelectionForeColor = Color.Black;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
-            dataGridView1.Location = new Point(37, 178);
+            dataGridView1.Location = new Point(37, 147);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersVisible = false;
             dataGridView1.RowHeadersWidth = 62;

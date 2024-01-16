@@ -69,7 +69,7 @@ namespace Task1
             string firstName = txt_firstname.Text.Trim();
             string lastName = txt_lastname.Text.Trim();
             if (string.IsNullOrWhiteSpace(firstName) || firstName.Length < 3 ||
-                firstName.Length > 18 || firstName.Contains("  "))
+                firstName.Length > 18 || firstName.Replace(" ", "").Length < 3)      //||   firstName.Contains("  "))
             {
 
 
@@ -79,14 +79,16 @@ namespace Task1
                     first1.ForeColor = Color.Red;
                 }
 
-                if (firstName.Contains(" "))
+                //else if (firstName.Contains("  "))
+                //{
+                //    first1.Text = "First Name must be between 3 and 18 characters.";
+                //    first1.ForeColor = Color.Red;
+                //}
+                else if (firstName.Length < 3 || firstName.Length > 18 || firstName.Replace(" ", "").Length < 3)
                 {
+             
                     first1.Text = "First Name must be between 3 and 18 characters.";
                     first1.ForeColor = Color.Red;
-                }
-                else
-                {
-                    first1.Text = "This Field is Required";
                     first1.ForeColor = Color.Red;
                 }
 
@@ -94,28 +96,34 @@ namespace Task1
             }
             else
             {
-                first1.Text = "";
+                first1.Text = string.Empty;
             }
 
-            if (string.IsNullOrWhiteSpace(lastName)|| lastName.Length < 2 ||
-                lastName.Length > 18 || lastName.Contains(" "))
+            if (string.IsNullOrWhiteSpace(lastName) || lastName.Length < 2 ||
+                lastName.Length > 18 || lastName.Replace(" ", "").Length < 2)
             {
                 if (string.IsNullOrWhiteSpace(lastName))
                 {
                     last1.Text = "This Field is Required";
                     last1.ForeColor = Color.Red;
                 }
-                if (lastName.Contains("  "))
-                {
-                    last1.Text = "Last Name must be between 2 and 18 characters.";
-                    last1.ForeColor = Color.Red;
-                }
+                //else if (lastName.Contains("  "))
+                //{
+                //    last1.Text = "Last Name must be between 2 and 18 characters.";
+                //    last1.ForeColor = Color.Red;
+                //}
 
-                else
+                else if (lastName.Length < 2 ||
+                lastName.Length > 18 ||  lastName.Replace(" ", "").Length < 2)
+                
                 {
                     last1.Text = "This Field is Required";
                     last1.ForeColor = Color.Red;
                 }
+            }
+            else
+            {
+                last1.Text = string.Empty;
             }
             if (string.IsNullOrWhiteSpace(txtcombo.Text) || txtcombo.Text != "Male" && txtcombo.Text != "Female" && txtcombo.Text != "Other")
             {
@@ -252,7 +260,7 @@ namespace Task1
                     if (birthDate.Year >= 1900 && birthDate.Year <= DateTime.Now.Year || age >= 5 && age <= 99)
                     {
                         dateTimePicker2.Value = birthDate;
-                        age1.Text=string.Empty;
+                        age1.Text = string.Empty;
                     }
                     else
                     {
@@ -328,43 +336,53 @@ namespace Task1
 
         private void buttondelete_Click(object sender, EventArgs e)
         {
-            if (StudentDetailsList.Count > 0)
+            DialogResult result;
+
+           
+            result = MessageBox.Show($"Are you sure you want to delete this student record", "Our_Students", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes && StudentDetailsList.Count > 0)
             {
-                int lastIndex = StudentDetailsList.Count - 1;
-
-
-                if (lastIndex >= 0)
-                {
-
-                    StudentDetailsList.RemoveAt(lastIndex);
-                }
-
+               
+                StudentDetailsList.RemoveAt(Index);
+                Form1 form1 = new Form1(StudentDetailsList);
+                this.Hide();
+                form1.Show();
+            }
+            else
+            {
+                txt_firstname.Text = StudentData.FirstName;
+                txt_lastname.Text = StudentData.LastName;
+                txtcombo.Text = StudentData.Gender;
+                dateTimePicker2.Value = StudentData.DateOfBirth.Date;
+                txt_age.Text = StudentData.Age.ToString();
+                txt_class.Text = StudentData.Class;
+                textBox2.Text = StudentData.Address;
             }
 
-            Form1 form1 = new Form1(StudentDetailsList);
-            this.Hide();
-            form1.Show();
+            
         }
 
         private void txt_firstname_TextChanged(object sender, EventArgs e)
         {
             string firstName = txt_firstname.Text.Trim();
-            if (string.IsNullOrWhiteSpace(firstName))
+            if (string.IsNullOrWhiteSpace(firstName) )
             {
                 first1.Text = "This Field is Required";
                 first1.ForeColor = Color.Red;
                 return;
             }
 
-            if (firstName.Length < 3 || firstName.Length > 15)
+            if (firstName.Length < 3 || firstName.Length > 18 || firstName.Replace(" ", "").Length < 3)
             {
                 first1.Text = "First Name must be between 3 and 18 characters";
                 first1.ForeColor = Color.Red;
                 return;
 
             }
+            else
 
-            first1.Text = "";
+                first1.Text = "";
 
         }
 
@@ -377,13 +395,30 @@ namespace Task1
                 last1.ForeColor = Color.Red;
                 return;
             }
-            if (lastName.Length < 2 || lastName.Length > 18 || lastName.EndsWith(""))
+            if (lastName.Length < 2 || lastName.Length > 18 || lastName.Replace(" ", "").Length < 2)
             {
                 last1.Text = "Last Name Must be between 2 and 18 characters";
                 last1.ForeColor = Color.Red;
                 return;
             }
-            last1.Text = "";
+            else
+                last1.Text = "";
+        }
+
+        private void txt_firstname_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txt_lastname_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != ' ' && e.KeyChar != '\b')
+
+                e.Handled = true;
         }
     }
 }

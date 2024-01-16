@@ -1,57 +1,56 @@
-﻿@page "/OurStudent"
-<!DOCTYPE html>
-<html>
-<body>
-    <div> <h2>HTML Forms</h2></div>
+﻿@page
+"/OurStudent"
 
-    <div class="myform" id="myForm">
-        <form action="#" id="formsave" method="get">
-            <div>
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" name="fname" placeholder="Enter your first Name"><br>
-            </div>
-            <div>
-                <label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lname" placeholder="Enter your first Name"><br>
-            </div>
-            <div>
-                <label for="gender">Gender</label>
-                <select name="gender" id="gender">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select> <br>
-            </div>
-            <div>
-                <label for="birthday">Date of Birth</label>
-                <input type="date" id="dateofbirth" name="dateofbirth">
-            </div>
-            <div>
-                <label for="age">Age</label>
-                <input type="number" id="age" name="age"> <br>
-            </div>
-            <div>
-                <label for="class">Class</label>
-                <input type="text" id="class" name="class" placeholder="Enter you Class"><br>
-            </div>
-            <div>
-                <label for="address">Address</label>
-                <textarea id="address" name="address" placeholder="Enter you Address"></textarea>
-            </div>
-
-            <br>
-            <div>
-                <button type="button" id="Button1" OnClick="submitform">Submit</button>
-                <asp:Button id="Button1" Text="Submit" OnClick="submitform()"  runat="server" Visible="true" />
-             </div>   
+@{
+    ViewData["Title"] = "OurStudent page";
+}
 
 
-        </form>
+
+
+
+<h2>OurStudent Page</h2>
+
+<form method="post">
+    <div>
+        <label asp-for="Student.FirstName"></label>
+        <input asp-for="Student.FirstName" />
+        <span asp-validation-for="Student.FirstName"></span>
     </div>
-    <script src="site.js"></script>
+    <div>
+        <label asp-for="Student.LastName"></label>
+        <input asp-for="Student.LastName" />
+        <span asp-validation-for="Student.LastName"></span>
+    </div>
+    <div>
+        <button type="submit" name="submitButton">Save</button>
+    </div>
+</form>
 
-</body>
-</html>
+@if (Model.SavedStudents != null && Model.SavedStudents.Any())
+{
+    <h2>Saved Data</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var savedStudent in Model.SavedStudents)
+            {
+                <tr>
+                    <td>@savedStudent.FirstName</td>
+                    <td>@savedStudent.LastName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
 
 
 

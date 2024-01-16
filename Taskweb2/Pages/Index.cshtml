@@ -1,0 +1,44 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<div id="fr">
+<form method="post" >
+    <div>
+        <label asp-for="UserData.FirstName"></label>
+        <input asp-for="UserData.FirstName" />
+    </div>
+    <div>
+        <label asp-for="UserData.LastName"></label>
+        <input asp-for="UserData.LastName" />
+    </div>
+    <div>
+        <label asp-for="UserData.Age"></label>
+        <input asp-for="UserData.Age" />
+    </div>
+    <div>
+        <label asp-for="UserData.DateOfBirth"></label>
+        <input asp-for="UserData.DateOfBirth" type="date" />
+    </div>
+     <div> 
+        <label asp-for="UserData.Gender"></label>
+        <select asp-for="UserData.Gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    <div>
+        <label asp-for="UserData.Class"></label>
+        <input asp-for="UserData.Class" />
+    </div>
+    <div>
+        <label asp-for="UserData.Address"></label>
+        <input asp-for="UserData.Address" />
+    </div>
+    
+
+    <button type="submit">Save</button>
+</form>
+</div>

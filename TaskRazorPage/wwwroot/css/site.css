@@ -1,0 +1,108 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.myform {
+    text-align: center;
+    border: 1px solid black;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 100px;
+    margin-left: 100px;
+    background-color: lightblue;
+}
+
+#myForm {
+    vertical-align: middle;
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+    /*height: 100%;
+    width: 100%;
+    display: flex;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;*/
+}
+
+label {
+    float: left;
+}
+
+input, select, textarea {
+    padding: 5px;
+    margin-bottom: 10px;
+    width: 40%;
+}
+
+.gnd {
+    width: 30px;
+}
+
+.gender {
+    width: 30px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.myform {
+    flex-direction: column;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+{
+    width: 30%;
+    text-align: left;
+}
+
+.gender {
+    box-sizing: border-box;
+}
+
+
+textarea {
+    margin-bottom: 10px;
+    margin: 20px;
+}
+
+input, select {
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.address {
+}
