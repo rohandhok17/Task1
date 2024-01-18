@@ -117,7 +117,7 @@ namespace Task1
                 lastName.Length > 18 ||  lastName.Replace(" ", "").Length < 2)
                 
                 {
-                    last1.Text = "This Field is Required";
+                    last1.Text = "Last Name must be between 2 and 18 characters.";
                     last1.ForeColor = Color.Red;
                 }
             }

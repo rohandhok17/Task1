@@ -9,8 +9,8 @@ namespace TaskRazorPage.NewFolder
         public static List<Employee> Employees = new List<Employee>
         {
             
-            new Employee {EmployeeID=1,UserName="Rohan",Password="Rohan"},
-            new Employee {EmployeeID=1,UserName="Rohan",Password="Rohan"}
+            new Employee {UserName="Rohan",Password="Rohan"},
+            new Employee {UserName="Rohan",Password="Rohan"}
         };
     }
 }
