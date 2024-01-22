@@ -4,10 +4,11 @@
 <html>
 <head>
     <link rel="stylesheet" href="/css/StyleSheet.css">
+    <link rel="stylesheet" href="/css/AddPage.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Form</title>
-  @*   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> *@
+
 </head>
 <body >
    <div class="main1">
@@ -65,9 +66,9 @@
 
         <div class="btn">
 
-                <div class="del"> <button type="button" onclick="deleteUser()">Delete</button></div>
-                <div class="sav"><button type="button" onclick="addOrUpdateUser()">Save</button></div>
-                <div class="can"><button type="button" onclick="cancelUser()">Cancel</button></div>
+                <div class="del"> <button class="Delete" type="button" onclick="deleteUser()" style="color:Red"  >Delete</button></div>
+                <div class="sav"><button class="Save"type="button" onclick="addOrUpdateUser()"style="background-color:steelblue"    >Save</button></div>
+                <div class="can"><button  class="Cancel"type="button" onclick="cancelUser()">Cancel</button></div>
          
         </div>
     </form>
@@ -140,7 +141,7 @@
             var age = document.getElementById("age").value;
             var sclass = document.getElementById("class").value;
             var address = document.getElementById("address").value;
-
+          
 
             if (firstName && lastName) {
                 var existingUsers = JSON.parse(localStorage.getItem('users')) || [];
@@ -184,9 +185,11 @@
 
                 // Navigate to datadisplay.html after saving
                 window.location.href = 'Index';
-            } else {
+            }
+            else {
                 alert('Please enter both first name and last name.');
             }
+            
         }
 
         function editUser(index) {

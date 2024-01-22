@@ -1,0 +1,89 @@
+﻿@page
+@model Student_HTML_JS_Project.Pages.AddStudentModel
+@section Scripts {
+
+    <script src="~/js/AddPage.js"></script>
+
+}
+@section styles {
+    <link rel="Stylesheet" href="~/css/AddPage.css" />
+}
+<html>
+<head>
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Form</title>
+
+</head>
+<body>
+    <div class="main1">
+
+
+        <br>
+        <form class="frm">
+            <h2>Add Student</h2>
+            <div class="frt">
+                <label for="firstName" class="l1">First Name<span class="required"> *</span></label>
+                <input type="text" id="firstName" placeholder="Please enter First Name">
+                <div id="first-name-err" class="errorf"></div>
+
+
+            </div>
+
+            <div class="lst">
+                <label for="lastName" class="f1">Last Name<span class="required"> *</span></label>
+                <input type="text" id="lastName" placeholder="Please enter Last Name">
+                <div id="last-name-err" class="errorl"></div>
+                <div id="last-name-err" class="errorf"></div>
+
+            </div>
+
+            <div class="gnd">
+                <label for="gender" class="g1">Gender<span class="required"> *</span></label>
+                <select id="gender" name="gender">
+                    <option value="" disabled selected style="color: lightgray">Please select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                    
+                </select>
+                <div id="gender-err" class="errorg"></div>
+            </div>
+
+            <div class="db">
+                <label for="dob" class="d1">Date of Birth<span class="required"> *</span></label>
+                <input type="date" id="dob" name="dob" >
+                <div id="dob-err" class="errord"></div>
+             
+
+
+                <label for="age" class="a1">Age<span class="required"> *</span></label>
+                <input type="number" id="age" name="age" ><small> years</small>
+                <div id="age-err" class="errora"></div>
+            </div>
+
+
+            <div class="cls">
+                <label for="class" class="c1">Class</label>
+                <input type="text" id="class" name="class" placeholder="Please enter Class">
+            </div>
+
+            <div class="ads">
+                <label for="address" class="add1">Address</label>
+                <textarea id="address" name="address" placeholder="Please enter address"></textarea><br>
+            </div>
+
+
+            <div class="btn">
+
+                <button class="Delete" type="button" onclick="deleteUser()" style="color:Red">Delete</button>
+                <div class="sav"><button class="Save" type="button" onclick="addOrUpdateUser()" style="background-color:steelblue">Save</button>
+                <div class="can"><button class="Cancel" type="button" onclick="cancelUser()">Cancel</button>
+
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+table, th, td {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    border:solid;
+    border-collapse: collapse;
+    padding: 10px;
+}
+.container {
+  
+}
+th{
+    color:black;
+    background-color:steelblue;
+}
+h1{
+    text-align:center;
+    
+}
+.body1 {
+    border: solid;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.search {
+    
+    position: absolute;
+    top: 73px;
+    right: 269px;
+}
+.btn{
+
+}
+.Add {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background-color: steelblue;
+    color: black;
+    border-radius: 4px;
+    position: absolute;
+    top: 73px;
+    right: 160px;
+    width: 8%;
+    height: 7%;
+    padding: 6px 12px;
+}
+#searchBox{
+    width:120px;
+    height:41px;
+}
+.theader{
+    
+}
+
+

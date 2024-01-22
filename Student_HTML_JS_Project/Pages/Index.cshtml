@@ -1,0 +1,60 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@section Scripts {
+
+    <script src="~/js/Index.js"></script>
+   
+}
+@section styles {
+    <link rel="Stylesheet" href="~/css/Index.css" />
+}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Student</title>
+
+   
+
+</head>
+<body>
+    <div class="body1" >
+        <div class="search">
+            <label for="searchBox"></label>
+            <input type="text" id="searchBox" oninput="filterTable()" placeholder="Search..">
+        </div>
+        <br>
+        <h1>OurStudent</h1>
+        <div>
+            <br>
+            <table id="userTable" class="container">
+                <thead>
+                    <tr class="first-row">
+                    <th >FirstName</th>
+                    <th>LastName</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Class</th>
+
+                </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+        <br>
+        <div class="btn">
+            <button type="button" class="Add" onclick="openUserForm()" a asp-page="/AddStudent">Add</button>
+        </div>
+    </div>
+      
+    <script>
+
+       
+    </script>
+
+
+</body>
+</html>

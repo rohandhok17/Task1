@@ -1,0 +1,87 @@
+﻿@page
+@model Student_HTML_JS_Project.Pages.EditPageModel
+<html>
+<head>
+    @section Scripts {
+
+        <script src="~/js/EditPage.js"></script>
+
+    }
+    @section styles {
+        <link rel="Stylesheet" href="~/css/AddPage.css" />
+    }
+  
+   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Form</title>
+
+</head>
+<body>
+    <div class="main1">
+
+
+        <br>
+        <form name="myForm" class="frm">
+            <h4>Edit Student</h4>
+            <div class="frt">
+                <label for="firstName" class="l1">First Name<span class="required"> *</span></label>
+                <input type="text" id="firstName" placeholder="Please enter First Name">
+                <div id="first-name-err" class="errorf"></div>
+
+
+            </div>
+
+            <div class="lst">
+                <label for="lastName" class="f1">Last Name<span class="required"> *</span></label>
+                <input type="text" id="lastName" placeholder="Please enter Last Name">
+                <div id="last-name-err" class="errorl"></div>
+
+            </div>
+
+            <div class="gnd">
+                <label for="gender" class="g1">Gender<span class="required"> *</span></label>
+                <select id="gender" name="gender">
+                    <option> Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+
+            </div>
+
+            <div class="db">
+                <label for="dob" class="d1">Date of Birth<span class="required"> *</span></label>
+                <input type="date" id="dob" name="dob" onchange="calculateAge()">
+
+
+                <label for="age" class="a1">Age<span class="required"> *</span></label>
+                <input type="number" id="age" name="age" oninput="calculateDOB()"><small> years</small>
+            </div>
+
+
+            <div class="cls">
+                <label for="class" class="c1">Class</label>
+                <input type="text" id="class" name="class" placeholder="Please enter Class">
+            </div>
+
+            <div class="ads">
+                <label for="address" class="add1">Address</label>
+                <textarea id="address" name="address" placeholder="Please enter address"></textarea><br>
+            </div>
+
+
+            <div class="btn">
+
+                <div class="del"> <button class="Delete" type="button" onclick="deleteUser()" style="color:Red">Delete</button></div>
+                <div class="sav"><button class="Save" type="button" onclick="addOrUpdateUser()" style="background-color:steelblue">Save</button></div>
+                <div class="can"><button class="Cancel" type="button" onclick="cancelUser()">Cancel</button></div>
+
+            </div>
+        </form>
+    </div>
+    <script>
+       
+    </script>
+</body>
+</html>
