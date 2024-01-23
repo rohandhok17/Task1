@@ -1,12 +1,14 @@
 ﻿
 var genderValidation = function () {
+    var gender = document.getElementById("gender");
     var genderValue = gender.value;
     console.log(genderValue);
     genderErr = document.getElementById("gender-err");
 
-    if (genderValue !== "Male" || genderValue !== "Famale" || genderValue !== "Other") {
+    if (genderValue ==="") {
         genderErr.innerHTML = "This field is required.";
         console.log("g1");
+        return false;
     } else {
         genderErr.innerHTML = "";
         console.log("g2");
@@ -46,26 +48,43 @@ age.oninput = function () {
     ageValidation();
 }
 
-var dob = Date(document.getElementById("dob").value);
+var dob = document.getElementById("dob");
+var dobErr = document.getElementById('dob-err');
+
 var dobValidation = function () {
-    
-    dobValue = Date(dob.value);
-    dobErr = document.getElementById('dob-err');
+    var dobValue = dob.value;
     var today = new Date();
-    
-    if (dobValue == today) {
+
+    if (!dobValue) {
         dobErr.innerHTML = "This field is required";
-        console.log("d1");
-      
+        return false;
     } else {
-        dobErr.innerHTML = "";
-        console.log("d2");
+        var dobDate = new Date(dobValue);  
+        if (isNaN(dobDate.getTime())) {  
+            dobErr.innerHTML = "Invalid date format";
+            return false;
+        }
+
+       
+        if (dobDate >= today) {
+            dobErr.innerHTML = "Date of birth cannot be today or in the future";
+            return false;
+        }
+
+        dobErr.innerHTML = "";  
+        age.oninput();  
         return true;
     }
 };
+
 dob.oninput = function () {
     dobValidation();
 };
+
+// Add an event listener for focusout (when the user leaves the input field)
+dob.addEventListener('focusout', function () {
+    dobValidation();
+});
 
 
 function getUrlParameter(name) {
@@ -113,13 +132,13 @@ function addOrUpdateUser() {
     var sclass = document.getElementById("class").value;
     var address = document.getElementById("address").value;
 
-    firstNameValidation();
-    lastNameValidation();
-    genderValidation();
-    dobValidation();
-    ageValidation();
+    var f=firstNameValidation();
+    var l=lastNameValidation();
+    var g=genderValidation();
+    var d= dobValidation();
+     var a=ageValidation();
 
-    if (firstName && lastName) {
+    if (f && l && g &&d && a) {
         var existingUsers = JSON.parse(localStorage.getItem('users')) || [];
         var editIndex = getUrlParameter('index');
 
@@ -158,14 +177,12 @@ function addOrUpdateUser() {
         document.getElementById("class").value = sclass;
         document.getElementById("address").value = address;
 
-        alert('User saved successfully!');
+        
 
         // Navigate to datadisplay.html after saving
         window.location.href = 'Index';
     }
-    //else {
-    //    alert('Please enter both first name and last name.');
-    //}
+   
 
 }
 
@@ -207,10 +224,12 @@ var firstNameValidation = function () {
     firstNameErr = document.getElementById('first-name-err');
 
     if (firstNameValue === "") {
-        firstNameErr.innerHTML = "First Name is required.";
+        firstNameErr.innerHTML = "This Field is required.";
+        return false;
     }
     else if (firstNameValue.length < 3 || firstNameValue.length > 18) {
         firstNameErr.innerHTML = "First Name must be between 3 and 18 characters.";
+        return false;
     } else {
         firstNameErr.innerHTML = "";
         return true;
@@ -228,10 +247,12 @@ var lastNameValidation = function () {
     lastNameErr = document.getElementById('last-name-err');
     if (lastNameValue === "") {
         lastNameErr.innerHTML = "This Field is required.";
+        return false;
     }
 
     else if (lastNameValue.length < 2 || lastNameValue.length > 18) {
         lastNameErr.innerHTML = "Last Name must be between 2 and 18 characters.";
+        return false;
     } else {
         lastNameErr.innerHTML = "";
         return true;
@@ -242,7 +263,51 @@ var lastNameValidation = function () {
 lastName.oninput = function () {
     lastNameValidation();
 }
+document.getElementById('dob').addEventListener('input', function () {
 
+    var dob = new Date(this.value);
+    console.log("enter1");
+    var today = new Date();
+
+    var age = today.getFullYear() - dob.getFullYear();
+
+    // Adjust age based on month and day
+
+    if (today.getMonth() < dob.getMonth() || (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())) {
+        console.log("enter2");
+        age--;
+
+    }
+    console.log("enter3");
+    document.getElementById('age').value = age;
+
+});
+
+
+document.getElementById('age').addEventListener('input', function () {
+
+    var age = parseInt(this.value);
+    console.log("enter4");
+    if (!isNaN(age) && age >= 0) {
+
+        var today = new Date();
+
+        var birthYear = today.getFullYear() - age;
+
+        var birthMonth = today.getMonth() + 1; // JavaScript months are 0-indexed
+
+        var birthDay = today.getDate();
+        console.log("enter5");
+        document.getElementById('dob').value = birthYear + '-' +
+
+            (birthMonth < 10 ? '0' : '') + birthMonth + '-' +
+
+            (birthDay < 10 ? '0' : '') + birthDay;
+
+    }
+ 
+
+});
 
 
 

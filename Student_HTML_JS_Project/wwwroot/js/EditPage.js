@@ -1,26 +1,72 @@
-﻿document.getElementById("dob").valueAsDate = new Date();
-function calculateAge() {
-    var dob = new Date(document.getElementById("dob").value);
-    var currentDate = new Date();
+﻿var genderValidation = function () {
 
-    var age = currentDate.getFullYear - dob.getFullYear();
-    if (currentDate.getMonth() < dob.getMonth() || (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
-        age--;
+    var genderValue = gender.value;
+    console.log(genderValue);
+    genderErr = document.getElementById("gender-err");
+
+    if (genderValue==="") {
+        genderErr.innerHTML = "This field is required.";
+        console.log("g1");
+        return false;
+    } else {
+        genderErr.innerHTML = "";
+        console.log("g2");
+        return true;
     }
-    document.getElementById("age").value = age;
+};
+gender.oninput = function () {
+    genderValidation();
 }
-function calculateDOB() {
-    var age = document.getElementById("age").value;
-    var currentDate = new Date();
 
-    var dobYear = currentDate.getFullYear() - age;
+var ageValidation = function () {
 
+    var ageInput = document.getElementById("age").value;
+    var ageValue = parseInt(ageInput, 10);
+    var ageErr = document.getElementById('age-err');
 
-    var dob = new Date(dobYear, 0, 1);
+    console.log(ageValue);
 
+    if (ageInput.trim() === "") {
+        ageErr.innerHTML = "Age is required";
+        return false;
+    }
 
-    document.getElementById("dob").valueAsDate = dob;
+    if (isNaN(ageValue) || ageValue < 5 || ageValue > 99) {
+        ageErr.innerHTML = "Age should be <br/> between 5 and 99";
+        console.log(ageErr.innerHTML);
+        /*console.log("age1");*/
+        return false;
+    } else {
+        ageErr.innerHTML = "";
+        /*console.log("no age error");*/
+        return true;
+    }
+};
+
+age.oninput = function () {
+    ageValidation();
 }
+
+var dob = Date(document.getElementById("dob").value);
+var dobValidation = function () {
+
+    dobValue = Date(dob.value);
+    dobErr = document.getElementById('dob-err');
+    var today = new Date();
+
+    if (dobValue == today) {
+        dobErr.innerHTML = "This field is required";
+       
+
+    } else {
+        dobErr.innerHTML = "";
+        console.log("d2");
+        return true;
+    }
+};
+dob.oninput = function () {
+    dobValidation();
+};
 function getUrlParameter(name) {
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -159,19 +205,18 @@ function deleteUser() {
         }
     }
 }
-var firstName = document.getElementById("firstName");
-
 var firstNameValidation = function () {
-
-    firstNameValue = firstName.value.trim();
+    var firstNameValue = firstName.value.trim().replace(/\s/g, '');
     validFirstName = /^[A-Za-z]+$/;
     firstNameErr = document.getElementById('first-name-err');
 
     if (firstNameValue === "") {
         firstNameErr.innerHTML = "First Name is required.";
+        return false;
     }
     else if (firstNameValue.length < 3 || firstNameValue.length > 18) {
         firstNameErr.innerHTML = "First Name must be between 3 and 18 characters.";
+        return false;
     } else {
         firstNameErr.innerHTML = "";
         return true;
@@ -184,15 +229,17 @@ firstName.oninput = function () {
 var lastName = document.getElementById("lastName");
 
 var lastNameValidation = function () {
-    lastNameValue = lastName.value.trim();
+    lastNameValue = lastName.value.trim().replace(/\s/g, '');
     validLastName = /^[A-Za-z]+$/;
     lastNameErr = document.getElementById('last-name-err');
     if (lastNameValue === "") {
-        lastNameErr.innerHTML = "Last Name is required.";
+        lastNameErr.innerHTML = "This Field is required.";
+        return false;
     }
 
     else if (lastNameValue.length < 2 || lastNameValue.length > 18) {
         lastNameErr.innerHTML = "Last Name must be between 2 and 18 characters.";
+        return false;
     } else {
         lastNameErr.innerHTML = "";
         return true;
@@ -203,4 +250,48 @@ var lastNameValidation = function () {
 lastName.oninput = function () {
     lastNameValidation();
 }
+document.getElementById('dob').addEventListener('input', function () {
 
+    var dob = new Date(this.value);
+    console.log("enter1");
+    var today = new Date();
+
+    var age = today.getFullYear() - dob.getFullYear();
+
+    // Adjust age based on month and day
+
+    if (today.getMonth() < dob.getMonth() || (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate())) {
+        console.log("enter2");
+        age--;
+
+    }
+    console.log("enter3");
+    document.getElementById('age').value = age;
+
+});
+
+
+document.getElementById('age').addEventListener('input', function () {
+
+    var age = parseInt(this.value);
+    console.log("enter4");
+    if (!isNaN(age) && age >= 0) {
+
+        var today = new Date();
+
+        var birthYear = today.getFullYear() - age;
+
+        var birthMonth = today.getMonth() + 1; // JavaScript months are 0-indexed
+
+        var birthDay = today.getDate();
+        console.log("enter5");
+        document.getElementById('dob').value = birthYear + '-' +
+
+            (birthMonth < 10 ? '0' : '') + birthMonth + '-' +
+
+            (birthDay < 10 ? '0' : '') + birthDay;
+
+    }
+
+
+});

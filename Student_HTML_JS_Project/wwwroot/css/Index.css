@@ -16,11 +16,26 @@ html {
     position: relative;
     min-height: 100%;
 }
+.first-row-color {
+    background-color:antiquewhite;
+}
+
+.clicked-row-color {
+    background-color:antiquewhite;
+}
+
 
 body {
-    margin-bottom: 60px;
+    
+
+
+    
 }
-table, th, td {
+.highlighted {
+    background-color:lightblue;
+}
+
+ th, td {
     font-family: Georgia, "Times New Roman", Times, serif;
     border:solid;
     border-collapse: collapse;
@@ -33,7 +48,7 @@ th{
     color:black;
     background-color:steelblue;
 }
-h1{
+h2{
     text-align:center;
     
 }
@@ -44,12 +59,19 @@ h1{
     padding-bottom: 20px;
     padding-top: 20px;
 }
+
 .search {
     
     position: absolute;
     top: 73px;
     right: 269px;
 }
+.first-row-color {
+    background-color:aquamarine;
+}
+
+/* Style for the clicked row */
+
 .btn{
 
 }
@@ -74,3 +96,23 @@ h1{
 }
 
 
+#userTable tr.default-color {
+    background-color: Window;
+    display: table-row;
+}
+
+#userTable tr.first-row-color {
+    background-color: #eaf2c2;
+    display: table-row;
+}
+
+#userTable tr.selected-color {
+    background-color: bisque;
+    display: table-row;
+}
+
+
+selected-row {
+    background-color: bisque;
+    display: table-row;
+}

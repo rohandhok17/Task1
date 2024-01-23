@@ -1,6 +1,9 @@
 ﻿var users = JSON.parse(localStorage.getItem('users')) || [];
-
+// var table = document.getElementById('userTable');
+// var tbody = table.querySelector('tbody');
 var table = document.getElementById('userTable');
+// var tbody = table.querySelector('tbody');
+
 for (var i = 0; i < users.length; i++) {
     var user = users[i];
     var row = table.insertRow(-1);
@@ -19,12 +22,34 @@ for (var i = 0; i < users.length; i++) {
     cell4.innerHTML = user.age;
     cell5.innerHTML = user.sclass;
 
+
+
+    if (i === 0) {
+        row.classList.add('first-row-color');
+    }
+
+    row.addEventListener('click', function (event) {
+        var rows = table.getElementsByTagName('tr');
+        var firstRow = rows[0];
+
+        // Reset background color for all rows
+        for (var j = 0; j < rows.length; j++) {
+            rows[j].style.backgroundColor = 'window';
+        }
+
+        // Remove the color class from the first row
+        // firstRow.classList.remove('first-row-color');
+
+        // Set background color for the clicked row
+        event.currentTarget.style.backgroundColor = '#eaf2c2';
+    });
+
     row.addEventListener('dblclick', function (event) {
         var rowIndex = event.target.parentNode.rowIndex;
-        editUser(rowIndex - 1); // Subtract 1 to account for the header row
+        editUser(rowIndex - 1);
+    
     });
 }
-
 function editUser(index) {
 
     var userToEdit = users[index];
@@ -101,24 +126,79 @@ document.addEventListener('DOMContentLoaded', function () {
                 r.classList.remove('selected');
             });
 
-            // Add 'selected' class to the clicked row
+           
             this.classList.add('selected');
         });
     });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    // Change the color of the first row when the page loads
-    highlightFirstRow();
-});
+th = document.getElementsByTagName('th');
+for (let c = 0; c < th.length; c++) {
+    th[c].addEventListener('click',item(c))
+}
+function item(c) {
+    return function () {
+        console.log(c);
+        sortTable(c)
+    }
+}
 
-function highlightFirstRow() {
-    // Get the first row element
-    var firstRow = document.querySelector("#userTable tbody tr.first-row");
+function sortTable(c) {
+    let table;
+    table = document.getElementById('userTable');
+    let rows,
+        i,
+        x,
+        y,
+        count = 0;
+    let switching = true;
 
-    // Check if the first row exists before attempting to modify it
-    if (firstRow) {
-        // Add a class to change the background color or set the style directly
-        firstRow.style.backgroundColor = "#FFFFCC"; // Set your desired background color
+    // Order is set as ascending
+    let direction = 'ascending';
+
+    // Run loop until no switching is needed
+    while (switching) {
+        switching = false;
+        let rows = table.rows;
+
+        //Loop to go through all rows
+        for (i = 1; i < rows.length - 1; i++) {
+            var Switch = false;
+
+            // Fetch 2 elements that need to be compared
+            x = rows[i].getElementsByTagName('TD')[c];
+            y = rows[i + 1].getElementsByTagName('TD')[c];
+
+            // Check the direction of order
+            if (direction == 'ascending') {
+                // Check if 2 rows need to be switched
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    // If yes, mark Switch as needed and break loop
+                    Switch = true;
+                    break;
+                }
+            } else if (direction == 'descending') {
+                // Check direction
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    // If yes, mark Switch as needed and break loop
+                    Switch = true;
+                    break;
+                }
+            }
+        }
+        if (Switch) {
+            // Function to switch rows and mark switch as completed
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+
+            // Increase count for each switch
+            count++;
+        } else {
+            // Run while loop again for descending order
+            if (count == 0 && direction == 'ascending') {
+                direction = 'descending';
+                switching = true;
+            }
+        }
     }
 }
