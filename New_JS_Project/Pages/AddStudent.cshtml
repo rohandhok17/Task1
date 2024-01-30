@@ -1,0 +1,116 @@
+﻿@page
+@model New_JS_Project.Pages.AddStudentModel
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add/Edit Student</title>
+    <!-- Link to your custom CSS file -->
+    <link rel="stylesheet" href="~/css/Add.css" />
+</head>
+
+<body>
+    <div class="contains">
+        <h2>
+            @{
+                // Conditionally change the heading based on whether you are adding or editing
+                if (Model.Student.Id == 0)
+                {
+                    <text>Add Student</text>;
+                }
+                else
+                {
+                    <text>Edit Student</text>;
+                }
+            }
+        </h2>
+
+        <form method="post" onsubmit="return validateForm()">
+
+            <div class="form-group">
+                <label for="firstName">First Name<span style="color: red;">*</span></label>
+                <input maxlength="15" type="text" id="firstName" name="firstName" placeholder="Please enter FirstName" onkeydown="return /[a-zA-Z ]/i.test(event.key)" value="@Model.Student.FirstName" />
+            </div>
+            <label id="firstNameError" class="error-label"></label>
+
+            <div class="form-group">
+                <label for="lastName">Last Name<span style="color: red;">*</span></label>
+                <input maxlength="18" type="text" id="lastName" name="lastName" placeholder="Please enter LastName" onkeydown="return /[a-zA-Z ]/i.test(event.key)" value="@Model.Student.LastName" />
+                
+            </div>
+            <label id="lastNameError" class="error-label"></label>
+
+            <div class="form-group">
+                <label for="gender">Gender<span style="color: red;">*</span></label>
+                <select name="Gender" id="gender" data-selected="@Model.Student.Gender">
+                    <option value="" disabled>Select the Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+           
+
+             <div><label id="genderError" class="error-label"></label></div>
+             
+            <div class="form-group">
+                <label for="dateOfBirth">Date of Birth<span style="color: red;">*</span></label>
+                <input  type="date" id="dateOfBirth" name="dateOfBirth" value="@Model.Student.DateOfBirth.ToString("yyyy-MM-dd")"/>
+               
+            
+                <label id="age1" for="age">Age<span style="color: red;">*</span></label>
+                <input maxlength="2" type="number" id="age" name="age" oninput="this.value = this.value.slice(0, 2)"
+                @{
+                    if (Model.Student.Id == 0)
+                    {
+                        <text>value="";</text>
+                    }
+                    else
+                    { <text>value="@Model.Student.Age";</text>
+                    }
+                } />
+
+                <label style="margin-left: 5px;">years</label>
+            </div>
+
+         
+                <label id="dateOfBirthError" class="error-label" style="display: inline-block; margin-right: 10px; height:18px"></label>
+                <label id="ageError" class="error-label" style="display: inline-block;height:18px" ></label>
+        
+
+            <div class="form-group">
+                <label for="class" >Class</label>
+                <input type="text" id="class" name="class" placeholder="Please enter class" value="@Model.Student.Class" style="margin-top:0px;" />
+               </div>
+
+            <div class="form-group">
+                <label style="margin-top:20px" for="address" placeholder="Please enter address">Address</label>
+                <textarea style="resize:none" id="address" name="address" rows="3" placeholder="Enter Address here">@Model.Student.Address</textarea>
+             
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" id="DeleteFlag" name="DeleteFlag" value="false" />
+                @if (Model.Student.Id != 0)
+                {
+                    <button type="button" class="delete-button" onclick="deleteStudent()">Delete</button>
+                }
+                else
+                {
+                    <button type="button" class="delete-button" style="background-color: white; color: white;" disabled>Delete</button>
+                }
+                <button style="margin-left:25;" type="submit" class="submit-button">Save</button>
+                <button type="button" class="cancel-button" onclick="cancelEdit()">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <!-- Reference the custom.js file -->
+    <script src="~/js/delete.js"></script>
+    <script src="~/js/cancel.js"></script>
+    <script src="~/js/agecal.js"></script>
+    <script src="~/js/Validation.js"></script>
+    <script src="~/js/custom.js"></script>
+</body>
+
+</html>

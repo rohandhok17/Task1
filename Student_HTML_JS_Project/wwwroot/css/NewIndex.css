@@ -1,0 +1,71 @@
+﻿#userTable tr.default-color {
+    background-color: Window;
+    display: table-row;
+}
+
+#userTable tr.first-row-color {
+    background-color: #eaf2c2;
+    display: table-row;
+}
+
+#userTable tr.selected-color {
+    background-color: bisque;
+    display: table-row;
+}
+
+
+selected-row {
+    background-color: bisque;
+    display: table-row;
+}
+
+.body1 {
+    margin-top:47px;
+    border: solid;
+   /* margin: 35px auto;*/
+    padding:30px;
+   
+}
+th {
+   
+    color: black;
+    background-color: steelblue;
+}
+
+h1{
+    text-align:center;
+}
+th, td {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    border: solid;
+    border-collapse: collapse;
+    padding: 10px;
+
+}
+div{
+    
+}
+#userTable{
+    width:80%;
+    margin-left:110px
+}
+.search{
+    
+
+    text-align:right;
+    
+}
+.Add {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background-color: steelblue;
+    color: black;
+    border-radius: 4px;
+   width:8%;
+   height:40px;
+   
+    
+  
+}
+#searchBox {
+    height: 40px;
+}

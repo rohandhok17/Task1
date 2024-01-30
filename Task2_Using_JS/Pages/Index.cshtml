@@ -1,0 +1,80 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@section Scripts {
+
+    <script src="~/js/Index.js"></script>
+   
+}
+@section styles {
+    <link rel="Stylesheet" href="~/css/NewIndex.css" />
+}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Student</title>
+
+   
+
+</head>
+<body id="main">
+    <div class="body1" >
+        <h1>OurStudent</h1>
+        <div class="search">
+            <label for="searchBox"></label>
+            <input type="text" id="searchBox" oninput="filterTable()" placeholder="Search..">
+
+            <button type="button" class="Add" onclick="location.href='@Url.Page("AddStudent")'">Add</button>
+        </div>
+        
+        
+        <div>
+            <br>
+            <table id="userTable" class="contains">
+                <thead>
+                    <tr class="first-row">
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Class</th>
+
+                </tr>
+                </thead>
+                <tbody id="tableBody">
+                    @foreach (var student in Model.Students)
+                    {
+                        <tr data-student-id="@student.ID">
+
+                            <td>@student.FirstName</td>
+                            <td>@student.LastName</td>
+                            <td>@student.Gender</td>
+                            <td>@student.Age</td>
+                            <td>@student.Class</td>
+                           
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div class="btn">
+           
+        </div>
+    </div>
+      
+    <script>
+
+       
+    </script>
+
+
+</body>
+</html>
+
+

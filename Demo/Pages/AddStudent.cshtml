@@ -1,0 +1,76 @@
+﻿@page
+@model Demo.Pages.AddStudentModel
+
+<form class="frm" method="post">
+    <h2>Add Student</h2>
+    <div id="frt">
+        <label for="firstName" class="f1">First Name<span class="required"> *</span></label>
+        <input minlength="3" maxlength="18" type="text" id="firstName" onkeypress="return /[a-z ]/i.test(event.key)"
+               placeholder="Please enter First Name">
+        <div id="first-name-err" class="errorf"></div>
+
+
+    </div>
+
+    <div id="lst">
+        <label for="lastName" class="l1">Last Name<span class="required"> *</span></label>
+        <input minlength="2" maxlength="18" type="text" id="lastName" placeholder="Please enter Last Name" onkeypress="return /[a-z ]/i.test(event.key)">
+        <div id="last-name-err" class="errorl"></div>
+
+
+    </div>
+
+    <div id="gnd">
+        <label for="gender" class="g1">Gender<span class="required"> *</span></label>
+        <select id="gender" name="gender">
+            <option value="" disabled selected style="color: lightgray">Please select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+
+        </select>
+        <div id="gender-err" class="errorg"></div>
+    </div>
+
+    <div class="db">
+        <div class="db1">
+            <label for="dob" class="d1">Date of Birth<span class="required"> *</span></label>
+            <input type="date" id="dob" name="dob">
+
+        </div>
+        <div class="db2">
+            <div id="dob-err" class="errord"></div>
+
+        </div>
+
+
+        <div class="db1">
+            <label for="age" class="a1">Age<span class="required"> *</span></label>
+            <input type="number" id="age" name="age"><small> years</small>
+
+        </div>
+    </div>
+    <div class="db2">
+
+        <div id="age-err" class="errora"></div>
+    </div>
+
+    <div id="cls">
+        <label for="class" class="c1">Class</label>
+        <input type="text" id="class" name="class" placeholder="Please enter Class">
+    </div>
+
+    <div id="ads">
+        <label for="address" class="add1">Address</label>
+        <textarea id="address" name="address" placeholder="Please enter address"></textarea><br>
+    </div>
+
+
+    <div class="btn">
+
+        @*  <button class="Delete" type="button" onclick="deleteUser()" style="color:Red">Delete</button> *@
+        <button class="Save" type="submit" onclick="addOrUpdateUser()" style="background-color:steelblue">Save</button>
+        <button class="Cancel" type="button" onclick="cancelUser()">Cancel</button>
+
+    </div>
+</form>

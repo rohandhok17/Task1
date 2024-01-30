@@ -151,15 +151,12 @@ function addOrUpdateUser() {
         document.getElementById("class").value = sclass;
         document.getElementById("address").value = address;
 
-        alert('User saved successfully!');
+       
 
         // Navigate to datadisplay.html after saving
         window.location.href = 'Index';
     }
-    else {
-        alert('Please enter both first name and last name.');
-    }
-
+    
 }
 
 function editUser(index) {
@@ -174,14 +171,14 @@ function editUser(index) {
         '&address=' + encodeURIComponent(userToEdit.address);
     // Redirect to userform.html with edit parameters
     window.location.href = editUrl;
-    alert('Edit operation performed.');
+   
 }
 function cancelUser() {
     window.location.href = 'Index';
 }
 
 function deleteUser() {
-    var confirmDelete = confirm("Are you sure you want to delete this user?");
+    var confirmDelete = confirm("Are you sure you want to delete this student records");
 
     if (confirmDelete) {
         var editIndex = getUrlParameter('index');
@@ -200,9 +197,7 @@ function deleteUser() {
 
             // Navigate to datadisplay.html after deletion
             window.location.href = 'Index';
-        } else {
-            alert('Cannot delete user. No user selected for deletion.');
-        }
+        } 
     }
 }
 var firstNameValidation = function () {

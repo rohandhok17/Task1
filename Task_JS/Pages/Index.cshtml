@@ -1,0 +1,89 @@
+﻿@page
+@model IndexModel
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Student</title>
+    <link rel="stylesheet" href="~/css/Index.css" />
+    <link rel="stylesheet" href="~/css/TableStyles.css" />
+</head>
+
+<body>
+
+
+
+    <div id="container">
+        <h1>Our Students</h1>
+
+        <div id="searchandbutton ">
+            <input style=" margin-left:560px;" type="text" oninput="filterTable()" id="searchInput" placeholder="Search..." />
+            <button type="button" onclick="location.href='@Url.Page("AddEdit")'">+Add</button>
+        </div>
+        <div>
+
+
+            <table id="studentTable">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-sort="FirstName">First Name</th>
+                        <th class="sortable" data-sort="LastName">Last Name</th>
+                        <th class="sortable" data-sort="Gender">Gender</th>
+                        <th class="sortable" data-sort="Age">Age</th>
+                        <th class="sortable" data-sort="Class">Class</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var student in Model.Students)
+                    {
+                        <tr data-student-id="@student.Id">
+
+                            <td>@student.FirstName</td>
+                            <td>@student.LastName</td>
+                            <td>@student.Gender</td>
+                            <td>@student.Age</td>
+                            <td>@student.Class</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @section scripts {
+        <script src="~/js/sortAndSelect.js"></script>
+
+    }
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function () {
+            var searchValue = this.value.trim().toLowerCase();
+            var rows = document.querySelectorAll('#studentTable tbody tr');
+
+            rows.forEach(function (row) {
+                var cells = row.getElementsByTagName('td');
+                var matchFound = false;
+
+
+                var columnsToSearch = [0, 1, 3];
+
+                for (var j = 0; j < columnsToSearch.length; j++) {
+                    var columnIndex = columnsToSearch[j];
+                    var cellText = cells[columnIndex].textContent.toLowerCase();
+
+                    if (cellText.includes(searchValue)) {
+                        matchFound = true;
+                        break;
+                    }
+                }
+
+                row.style.display = matchFound ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>

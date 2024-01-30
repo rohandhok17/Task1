@@ -9,7 +9,7 @@
    
 }
 @section styles {
-    <link rel="Stylesheet" href="~/css/Index.css" />
+    <link rel="Stylesheet" href="~/css/NewIndex.css" />
 }
 <html>
 <head>
@@ -22,15 +22,18 @@
 </head>
 <body id="main">
     <div class="body1" >
+        <h1>OurStudent</h1>
         <div class="search">
             <label for="searchBox"></label>
             <input type="text" id="searchBox" oninput="filterTable()" placeholder="Search..">
+
+            <button type="button" class="Add" onclick="openUserForm()" a asp-page="/AddStudent">Add</button>
         </div>
-        <br>
-        <h2>OurStudent</h2>
+        
+        
         <div>
             <br>
-            <table id="userTable" class="container">
+            <table id="userTable" class="contains">
                 <thead>
                     <tr class="first-row">
                     <th>FirstName</th>
@@ -41,12 +44,15 @@
 
                 </tr>
                 </thead>
-                <tbody id="tableBody"></tbody>
+                <tbody id="tableBody">
+
+
+                </tbody>
             </table>
         </div>
         <br>
         <div class="btn">
-            <button type="button" class="Add" onclick="openUserForm()" a asp-page="/AddStudent">Add</button>
+           
         </div>
     </div>
       

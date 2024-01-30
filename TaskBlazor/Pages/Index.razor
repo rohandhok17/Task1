@@ -1,0 +1,37 @@
+﻿@page "/"
+@inherits IndexBase
+
+
+
+
+
+
+<table >
+    <thead>
+        <tr>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Class</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Students)
+        {
+            <tr data-student-id="@student.Id">
+
+                <td>@student.FirstName</td>
+                <td>@student.LastName</td>
+                <td>@student.Gender</td>
+                <td>@student.Age</td>
+                <td>@student.Class</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<button type="submit"><a href="/AddStudent">+Add</a></button>
+
+

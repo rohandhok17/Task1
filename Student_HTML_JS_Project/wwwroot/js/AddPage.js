@@ -167,7 +167,7 @@ function addOrUpdateUser() {
         }
         
 
-        localStorage.setItem('users', JSON.stringify(existingUsers));
+       localStorage.setItem('users', JSON.stringify(existingUsers));
 
         document.getElementById("firstName").value = '';
         document.getElementById("lastName").value = '';
