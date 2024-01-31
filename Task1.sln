@@ -13,13 +13,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Student_JS", "..\..\..\Down
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task_JS", "Task_JS\Task_JS.csproj", "{7E918B39-ADA9-4634-9786-9443E0DDE9D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskBlazor", "TaskBlazor\TaskBlazor.csproj", "{5F2D1255-2A82-44F0-92FE-526CACCCA5D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskBlazor", "TaskBlazor\TaskBlazor.csproj", "{5F2D1255-2A82-44F0-92FE-526CACCCA5D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JS_Using_Student", "..\JS_Using_Student\JS_Using_Student\JS_Using_Student.csproj", "{DD8FDE3B-4E70-4BF9-ACE4-0AC589D324BB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JS_Project", "..\JS_Using_Student\JS_Project\JS_Project.csproj", "{99C82F21-88B5-4E02-93B4-58CB35D7F4BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentManagement", "StudentManagement\StudentManagement.csproj", "{43181CCF-1FB8-4DD9-B498-2543810FFF15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentManagement", "StudentManagement\StudentManagement.csproj", "{43181CCF-1FB8-4DD9-B498-2543810FFF15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

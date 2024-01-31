@@ -1,11 +1,14 @@
 ﻿@page "/"
-@inherits IndexBase
+@using StudentManagement;
+  @inject NavigationManager NavigationManager
 
 
 
 
 
-
+<div>
+    <button type="button" @onclick="AddStudent">Add</button>
+</div>
 <table >
     <thead>
         <tr>
@@ -18,9 +21,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var student in Students)
+        @foreach (var student in students)
         {
-            <tr data-student-id="@student.Id">
+            <tr @ondblclick="(()=> EditPage(student.Id))" >
 
                 <td>@student.FirstName</td>
                 <td>@student.LastName</td>
@@ -32,6 +35,28 @@
         }
     </tbody>
 </table>
-<button type="submit"><a href="/AddStudent">+Add</a></button>
+
+@code{
 
 
+    private List<Student> students;
+
+    protected override void OnInitialized()
+    {
+        students = StudentService.GetStudents();
+
+        //return base.OnInitializedAsync();
+    }
+    private void AddStudent()
+    {
+        NavigationManager.NavigateTo("/AddStudent");
+    }
+    // private void EditStudent(int id){
+     
+    //     NavigationManager.NavigateTo($"/AddStudent/{id}");
+    // }
+    private void EditPage(int id)
+    {
+        NavigationManager.NavigateTo($"/AddStudent/{id}");
+    }
+}

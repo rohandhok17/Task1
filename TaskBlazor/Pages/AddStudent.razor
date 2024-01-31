@@ -1,18 +1,115 @@
 ﻿@page "/AddStudent"
-@inherits AddStudentBase
+@page "/AddStudent/{id:int}"
 
-
-@* <EditForm Model="@students" >
+@using StudentManagement;
+@inject NavigationManager NavigationManager
+ <PageTitle>AddStudent</PageTitle>
+<h2> Add Student</h2>
+<EditForm Model="@student" OnValidSubmit="HandleSubmit" >
+    <DataAnnotationsValidator/>
+   @*  <ValidationSummary></ValidationSummary> *@
     <div>
-        <label for="firstName">FirstName</label>
-        <InputText id="firstName" @bind-Value="students.FirstName"></InputText>
+        <label  for="firstName">FirstName</label>
+        <InputText id="firstName" @bind-Value="student.FirstName"></InputText>
+        <ValidationMessage For="@(()=>student.FirstName)"/>
     </div>
-
     <div>
         <label for="lastName">LastName</label>
-        <InputText id="lastName" @bind-Value="students.LastName"></InputText>
+        <InputText id="lastName" @bind-Value="student.LastName"></InputText>
+        <ValidationMessage For="@(()=>student.LastName)" />
     </div>
-    <button type="submit" onsubmit="HandleSubmit">Save</button>
-   
-</EditForm> *@
+    <div>
+        <label for="lastName">Gender</label>
+        <InputSelect id="gender" @bind-Value="student.Gender">
+            <option value="" >Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </InputSelect>
+        <ValidationMessage For="@(()=>student.Gender)" />
+        <div>
+            <label for="dob">DateOfBirth</label>
+            <InputDate @bind-Value="@student.DateOfBirth" @bind-Value:format="dd/MM/yyyy" />
+            <ValidationMessage For="@(()=>student.DateOfBirth)" />
+        </div>
+    </div>
+ <div>
+        <label for="age">Age</label>
+        <InputNumber id="number" @bind-Value="student.Age"></InputNumber>
+        <ValidationMessage For="@(()=>student.Age)" />
+    </div>
+    <div>
+        <label for="class">Class</label>
+        <InputText id="class" @bind-Value="student.Class"></InputText>
+    </div>
+    <div>
+        <label for="address">Address</label>
+        <InputTextArea id="address" @bind-Value="student.Address"></InputTextArea>
+    </div>
+    
+    <button type="button" @onclick="CancelStudent">Cancel</button>
+    <button type="submit" >Save</button>
+
+</EditForm>
+@code{
+    [Parameter]
+    public int? Id { get; set; }
+    private Student? student;
+    protected override void OnParametersSet()
+    {
+        if(Id is not null)
+        {
+            Student foundStudent = StudentService.GetStudent(Id.Value);
+            student = new()
+                {
+                    Id = foundStudent.Id,
+                    FirstName = foundStudent.FirstName,
+                    LastName = foundStudent.LastName,
+                    Gender = foundStudent.Gender,
+                    DateOfBirth = foundStudent.DateOfBirth,
+                    Age = foundStudent.Age,
+                    Class = foundStudent.Class,
+                    Address = foundStudent.Address
+                };
+
+        }
+        else
+        {
+            student = new()
+            {
+                    FirstName = "",
+                    LastName = "",
+                    Class = "",
+                    Address = ""
+            };
+        }
+    }
+
+
+    // public Student student = new()
+    //     {
+    //         FirstName = "",
+    //         LastName = "",
+    //         Class = "",
+    //         Address = ""
+    // };
+    public void HandleSubmit()
+    {
+        if (student!.Id == 0)
+        {
+            StudentService.AddStudent(student);
+        }
+        else
+        {
+            StudentService.UpdateStudent(student);
+        }
+        // StudentService.AddStudent(student);
+        NavigationManager.NavigateTo("/");
+    }
+    public void CancelStudent()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
+
     
