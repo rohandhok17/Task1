@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task2_Using_JS", "Task2_Usi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Student_JS", "..\..\..\Downloads\project1\Our_Students\Student_JS.csproj", "{E28DDDEC-E8E3-4011-A99E-2DE6A01A0E5B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Task_JS", "Task_JS\Task_JS.csproj", "{7E918B39-ADA9-4634-9786-9443E0DDE9D0}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskBlazor", "TaskBlazor\TaskBlazor.csproj", "{5F2D1255-2A82-44F0-92FE-526CACCCA5D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JS_Using_Student", "..\JS_Using_Student\JS_Using_Student\JS_Using_Student.csproj", "{DD8FDE3B-4E70-4BF9-ACE4-0AC589D324BB}"
@@ -43,10 +41,6 @@ Global
 		{E28DDDEC-E8E3-4011-A99E-2DE6A01A0E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E28DDDEC-E8E3-4011-A99E-2DE6A01A0E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E28DDDEC-E8E3-4011-A99E-2DE6A01A0E5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7E918B39-ADA9-4634-9786-9443E0DDE9D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E918B39-ADA9-4634-9786-9443E0DDE9D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E918B39-ADA9-4634-9786-9443E0DDE9D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E918B39-ADA9-4634-9786-9443E0DDE9D0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5F2D1255-2A82-44F0-92FE-526CACCCA5D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F2D1255-2A82-44F0-92FE-526CACCCA5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F2D1255-2A82-44F0-92FE-526CACCCA5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -4,14 +4,19 @@
 
 
 
+<div class="contains">
+    <h1 class="h1">OurStudent</h1>
 
-
-<div>
-    <button type="button" @onclick="AddStudent">Add</button>
-</div>
-<table >
+        <div class="SearchAdd">
+            <label for="searchBox"></label>
+        <input type="text" id="searchBox" @bind="Filter" @bind:event="oninput" placeholder="Search..." />
+        </div>
+    <div> <button type="button" @onclick="AddStudent" class="rounded-button">Add</button></div>
+    </div>
+    <div class="text-center" id="table-container">
+        <table id="userTable">
     <thead>
-        <tr>
+            <tr class="first-row">
             <th>FirstName</th>
             <th>LastName</th>
             <th>Gender</th>
@@ -20,10 +25,10 @@
 
         </tr>
     </thead>
-    <tbody>
-        @foreach (var student in students)
+        <tbody id="tableBody">
+            @foreach (var student in students)
         {
-            <tr @ondblclick="(()=> EditPage(student.Id))" >
+                <tr @ondblclick="(()=> EditPage(student.Id))" class="first-row">
 
                 <td>@student.FirstName</td>
                 <td>@student.LastName</td>
@@ -35,11 +40,12 @@
         }
     </tbody>
 </table>
-
+</div>
 @code{
 
-
+    public string Filter { get; set; }
     private List<Student> students;
+    private Student? currentStudent;
 
     protected override void OnInitialized()
     {
@@ -51,12 +57,14 @@
     {
         NavigationManager.NavigateTo("/AddStudent");
     }
-    // private void EditStudent(int id){
-     
-    //     NavigationManager.NavigateTo($"/AddStudent/{id}");
-    // }
+
     private void EditPage(int id)
     {
-        NavigationManager.NavigateTo($"/AddStudent/{id}");
+        NavigationManager.NavigateTo($"/EditStudent/{id}");
     }
+    private void DeleteStudent(){
+        StudentService.DeleteStudent(currentStudent!.Id);
+        students = StudentService.GetStudents();
+    }
+    
 }

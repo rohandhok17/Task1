@@ -29,13 +29,13 @@ namespace TaskBlazor.Pages
         public static void UpdateStudent(Student updateStudent)
         {
             Student exitingStudent=GetStudent(updateStudent.Id);
-            exitingStudent.FirstName= updateStudent.FirstName;
-            exitingStudent.LastName= updateStudent.LastName;
+            exitingStudent.FirstName= updateStudent.FirstName.Trim();
+            exitingStudent.LastName= updateStudent.LastName.Trim();
             exitingStudent.Gender= updateStudent.Gender;
             exitingStudent.Age= updateStudent.Age;
             exitingStudent.DateOfBirth= updateStudent.DateOfBirth;
-            exitingStudent.Class= updateStudent.Class;
-            exitingStudent.Address= updateStudent.Address;
+            exitingStudent.Class= updateStudent.Class.Trim();
+            exitingStudent.Address= updateStudent.Address.Trim();
         }
         public static void DeleteStudent(int id)
         {

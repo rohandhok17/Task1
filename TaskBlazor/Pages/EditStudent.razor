@@ -1,0 +1,143 @@
+﻿
+@page "/EditStudent/{id:int}"
+@inject IJSRuntime JsRuntime
+@using StudentManagement;
+@inject NavigationManager NavigationManager
+<PageTitle>EditStudent</PageTitle>
+<div id="addstd1">
+<h2>Edit Student</h2>
+<EditForm Model="@student" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    @*  <ValidationSummary></ValidationSummary> *@
+    <div>
+            <label for="firstName">FirstName<span id="re"> *</span></label>
+            <InputText id="firstName1" @bind-Value="student.FirstName" placeholder="Please enter First Name"></InputText>
+        <ValidationMessage For="@(()=>student.FirstName)" />
+    </div>
+    <div>
+            <label for="lastName">LastName<span id="re"> *</span></label>
+            <InputText id="lastName1" @bind-Value="student.LastName" placeholder="Please enter Last Name"></InputText>
+        <ValidationMessage For="@(()=>student.LastName)" />
+    </div>
+    <div>
+            <label for="gender">Gender<span id="re"> *</span></label>
+        <InputSelect id="gender1" @bind-Value="student.Gender">
+            <option value="">Please Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </InputSelect>
+        <ValidationMessage For="@(()=>student.Gender)" />
+        </div>
+        <div id="combo1">
+                <label for="dob">DateOfBirth<span id="re"> *</span></label>
+                <InputDate id="dob1" @bind-Value="@student.DateOfBirth" @bind-Value:format="dd/MM/yyyy" />
+            <ValidationMessage For="@(()=>student.DateOfBirth)" />
+                <div>
+                    <label for="age">Age<span id="re"> *</span></label>
+                    <InputNumber id="age1" @bind-Value="student.Age"></InputNumber>
+                    <ValidationMessage For="@(()=>student.Age)" />
+                </div>
+        </div>
+    
+    
+    <div>
+        <label for="class">Class</label>
+            <InputText id="class1" @bind-Value="student.Class" placeholder="Please enter class"></InputText>
+    </div>
+    <div>
+        <label for="address">Address</label>
+            <InputTextArea id="address1" @bind-Value="student.Address" placeholder="Please enter address"></InputTextArea>
+    </div>
+        <div id="btn1">
+            <button type="button" @onclick="DeleteStd" class="btn btn-danger">Delete</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" @onclick="CancelStudent" class="btn btn-secondary">Cancel</button>
+        </div>
+  
+    
+   
+
+</EditForm>
+</div>
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+    private Student? student;
+    private List<Student> students;
+    private Student? currentStudent;
+    protected override void OnParametersSet()
+    {
+        if (Id is not null)
+        {
+            Student foundStudent = StudentService.GetStudent(Id.Value);
+            student = new()
+                {
+                    Id = foundStudent.Id,
+                    FirstName = foundStudent.FirstName,
+                    LastName = foundStudent.LastName,
+                    Gender = foundStudent.Gender,
+                    DateOfBirth = foundStudent.DateOfBirth,
+                    Age = foundStudent.Age,
+                    Class = foundStudent.Class,
+                    Address = foundStudent.Address
+                };
+
+        }
+        else
+        {
+            student = new()
+                {
+                    FirstName = "",
+                    LastName = "",
+                    Class = "",
+                    Address = ""
+                };
+        }
+    }
+
+
+    // public Student student = new()
+    //     {
+    //         FirstName = "",
+    //         LastName = "",
+    //         Class = "",
+    //         Address = ""
+    // };
+    public void HandleSubmit()
+    {
+        if (student!.Id == 0)
+        {
+            StudentService.AddStudent(student);
+        }
+        else
+        {
+            StudentService.UpdateStudent(student);
+        }
+
+        NavigationManager.NavigateTo("/");
+    }
+    public void CancelStudent()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    public async Task DeleteStd()
+    {
+        await JsRuntime.InvokeVoidAsync("alert", "Are you sure you want to Delete this student records"); 
+
+        bool confirmed = await JsRuntime.InvokeAsync<bool>("confirm", "Are you sure?");
+        
+        if(confirmed){
+            StudentService.DeleteStudent(student.Id);
+            // students = StudentService.GetStudents();
+            NavigationManager.NavigateTo("/");
+        }
+        else{
+
+        }
+    }
+   
+    
+
+}

@@ -1,56 +1,63 @@
 ﻿@page "/AddStudent"
 @page "/AddStudent/{id:int}"
-
+@* @inherits AddStudentBase *@
 @using StudentManagement;
 @inject NavigationManager NavigationManager
  <PageTitle>AddStudent</PageTitle>
+ <div id="addstd">
 <h2> Add Student</h2>
 <EditForm Model="@student" OnValidSubmit="HandleSubmit" >
     <DataAnnotationsValidator/>
-   @*  <ValidationSummary></ValidationSummary> *@
-    <div>
-        <label  for="firstName">FirstName</label>
-        <InputText id="firstName" @bind-Value="student.FirstName"></InputText>
+  
+    <div id="frt">
+            <label for="firstName">FirstName<span id="re"> *</span></label>
+            <InputText id="firstName" @bind-Value="student.FirstName" placeholder="Please enter First Name"></InputText>
         <ValidationMessage For="@(()=>student.FirstName)"/>
     </div>
-    <div>
-        <label for="lastName">LastName</label>
-        <InputText id="lastName" @bind-Value="student.LastName"></InputText>
+    <div id="lst">
+            <label for="lastName">LastName<span id="re"> *</span></label>
+            <InputText id="lastName" @bind-Value="student.LastName" placeholder="Please enter Last Name"></InputText>
         <ValidationMessage For="@(()=>student.LastName)" />
     </div>
-    <div>
-        <label for="lastName">Gender</label>
+    <div id="gnd">
+            <label for="gender">Gender<span id="re"> *</span></label>
         <InputSelect id="gender" @bind-Value="student.Gender">
-            <option value="" >Select Gender</option>
+            <option value="" >Please Select Gender</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Other">Other</option>
         </InputSelect>
         <ValidationMessage For="@(()=>student.Gender)" />
-        <div>
-            <label for="dob">DateOfBirth</label>
-            <InputDate @bind-Value="@student.DateOfBirth" @bind-Value:format="dd/MM/yyyy" />
-            <ValidationMessage For="@(()=>student.DateOfBirth)" />
         </div>
-    </div>
- <div>
-        <label for="age">Age</label>
-        <InputNumber id="number" @bind-Value="student.Age"></InputNumber>
-        <ValidationMessage For="@(()=>student.Age)" />
-    </div>
-    <div>
-        <label for="class">Class</label>
-        <InputText id="class" @bind-Value="student.Class"></InputText>
-    </div>
-    <div>
-        <label for="address">Address</label>
-        <InputTextArea id="address" @bind-Value="student.Address"></InputTextArea>
-    </div>
+        <div id="combo">
+                <label for="dob">DateOfBirth<span id="re"> *</span></label>
+            <InputDate id="dob" @bind-Value="@student.DateOfBirth" @bind-Value:format="dd/MM/yyyy"  />
+            <ValidationMessage For="@(()=>student.DateOfBirth)" />
+                <div id="ag1">
+                    <label for="age">Age<span id="re"> *</span></label>
+                <InputNumber id="age" @bind-Value="student.Age" ><span>years</span></InputNumber>
+                   @*  <ValidationMessage For="@(()=>student.Age)" id="error-age" /> *@
+                </div>
+        </div>
     
-    <button type="button" @onclick="CancelStudent">Cancel</button>
-    <button type="submit" >Save</button>
+ 
+    <div id="cts">
+        <label for="class">Class</label>
+            <InputText id="class" @bind-Value="student.Class" placeholder="Please enter class"></InputText>
+    </div>
+    <div id="ads">
+        <label for="address">Address</label>
+            <InputTextArea id="address" @bind-Value="student.Address" placeholder="Please enter address"></InputTextArea>
+    </div>
+        <div id="btn">
+            <button id="save" type="submit" class="btn btn-primary">Save</button>
+            <button id="cancel"type="button" @onclick="CancelStudent" class="btn btn-secondary">Cancel</button>
+         
+        </div>
+    
 
 </EditForm>
+</div>
 @code{
     [Parameter]
     public int? Id { get; set; }
@@ -85,14 +92,8 @@
         }
     }
 
+    
 
-    // public Student student = new()
-    //     {
-    //         FirstName = "",
-    //         LastName = "",
-    //         Class = "",
-    //         Address = ""
-    // };
     public void HandleSubmit()
     {
         if (student!.Id == 0)
@@ -110,6 +111,8 @@
     {
         NavigationManager.NavigateTo("/");
     }
+    
+    
 }
 
     
