@@ -1,0 +1,14 @@
+﻿@using StudentManagement;
+  @inject NavigationManager NavigationManager
+<h3>SearchBox</h3>
+
+@code {
+    private List<Student> students;
+    private Student? currentStudent;
+    public EventCallback<string> OnSearch { get; set; }
+    private string SerachStudent;
+    private async Task OnSearchStudent()
+    {
+        await OnSearch.InvokeAsync(SerachStudent);
+    }
+}

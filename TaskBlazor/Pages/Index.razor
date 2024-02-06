@@ -1,7 +1,7 @@
 ﻿@page "/"
 @using StudentManagement;
-  @inject NavigationManager NavigationManager
-
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 
 
 <div class="contains">
@@ -9,49 +9,71 @@
 
         <div class="SearchAdd">
             <label for="searchBox"></label>
-        <input type="text" id="searchBox" @bind="Filter" @bind:event="oninput" placeholder="Search..." />
+        <input type="text" id="searchBox" @bind="searchInputValue" @oninput="SearchStudents" placeholder="Search..." />
         </div>
     <div> <button type="button" @onclick="AddStudent" class="rounded-button">Add</button></div>
     </div>
+    
     <div class="text-center" id="table-container">
         <table id="userTable">
     <thead>
+          
+
             <tr class="first-row">
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>Gender</th>
-            <th>Age</th>
-            <th>Class</th>
+                <th @onclick="() => SortTable(nameof(Student.FirstName))">FirstName</th>
+                <th @onclick="() => SortTable(nameof(Student.LastName))">LastName</th>
+                <th @onclick="() => SortTable(nameof(Student.Gender))">Gender</th>
+                <th @onclick="() => SortTable(nameof(Student.Age))">Age</th>
+                <th @onclick="() => SortTable(nameof(Student.Class))">Class</th>
 
-        </tr>
-    </thead>
-        <tbody id="tableBody">
-            @foreach (var student in students)
-        {
-                <tr @ondblclick="(()=> EditPage(student.Id))" class="first-row">
-
-                <td>@student.FirstName</td>
-                <td>@student.LastName</td>
-                <td>@student.Gender</td>
-                <td>@student.Age</td>
-                <td>@student.Class</td>
 
             </tr>
-        }
+    </thead>
+        <tbody id="tableBody">
+            @foreach (var student in fiterstudent)
+            {
+                <tr @ondblclick="()=> EditPage(student.Id)"
+                    class="@((currentStudent == null && student == fiterstudent.First()) || (currentStudent != null && currentStudent.Id == student.Id) ? "highlight" : "normal")"
+                    @onclick="@(()=> ReturnRowData(student))">
+                    <td>@student.FirstName</td>
+                    <td>@student.LastName</td>
+                    <td>@student.Gender</td>
+                    <td>@student.Age</td>
+                    <td>@student.Class</td>
+                </tr>
+            }
     </tbody>
 </table>
 </div>
 @code{
-
-    public string Filter { get; set; }
+    public string searchInputValue = "";
+    private string FirstName;
     private List<Student> students;
+    private string student;
+    private string std;
     private Student? currentStudent;
 
+    public void SearchStudents(ChangeEventArgs e)
+    {
+        searchInputValue = e.Value.ToString();
+
+    }
+    private List<Student> fiterstudent
+    {
+        get
+        {
+            return students.Where(s => string.IsNullOrWhiteSpace(searchInputValue) ||
+                                       s.FirstName.Contains(searchInputValue, StringComparison.OrdinalIgnoreCase) ||
+                                       s.LastName.Contains(searchInputValue, StringComparison.OrdinalIgnoreCase) ||
+                                       s.Age.ToString().Contains(searchInputValue, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
+    }
     protected override void OnInitialized()
     {
+
         students = StudentService.GetStudents();
 
-        //return base.OnInitializedAsync();
+
     }
     private void AddStudent()
     {
@@ -66,5 +88,53 @@
         StudentService.DeleteStudent(currentStudent!.Id);
         students = StudentService.GetStudents();
     }
+    public EventCallback<Student> OnRowClicked { get; set; }
+    public string HighlightSelected = "normal";
+    public async void ReturnRowData(Student std)
+    {
+        if (currentStudent != null && currentStudent.Id != std.Id)
+        {
+            HighlightSelected = "normal"; // Reset the highlight for the previously selected row
+        }
+
+        HighlightSelected = "highlight";
+        currentStudent = std;
+
+        await OnRowClicked.InvokeAsync(std);
+    }
+    private string sortBy = "FirstName";
+    private bool ascending = false;
+    private void SortTable(string columnName)
+    {
+        if (sortBy == columnName)
+        {
+            ascending = !ascending;
+        }
+        else
+        {
+            sortBy = columnName;
+            ascending = true;
+        }
+        SortStudent();
+    }
+    
+    private void SortStudent()
+    {
+        if (ascending)
+        {
+            students = students.OrderBy(s => s.GetType().GetProperty(sortBy)?.GetValue(s, null)).ToList();
+        }
+        else
+        {
+            students = students.OrderByDescending(s => s.GetType().GetProperty(sortBy)?.GetValue(s, null)).ToList();
+        }
+
+        StateHasChanged();
+    }
     
 }
+
+
+    
+    
+

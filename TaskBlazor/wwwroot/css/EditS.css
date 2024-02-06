@@ -4,8 +4,8 @@
     border: solid;
     top: 300px;
     left: 75px;
-    width: 800px;
-    height: 450px;
+    width: 620px;
+    height: 500px;
     border: solid;
 }
 
@@ -17,44 +17,51 @@ label {
 }
 
 #firstName1 {
-    margin-left: 40px;
-    width: 300px;
+    border: 2px solid black;
+    margin-left: 39px;
+    width: 350px;
     height: 25px;
-    
 }
 
 #lastName1 {
+    margin-bottom: -10px;
+    border: 2px solid black;
     margin-left: 40px;
-    width: 300px;
+    width: 350px;
     height: 25px;
 }
 
 #gender1 {
+    border: 2px solid black;
     margin-left: 62px;
-    width: 150px;
+    width: 180px;
     height: 25px;
 }
 
 #dob1 {
+    border: 2px solid black;
     margin-left: 32px;
-    width: 150px;
+    width: 180px;
     height: 25px;
 }
 
 #age1 {
+    border: 2px solid black;
     width: 50px;
     height: 25px;
 }
 
 #class1 {
+    border: 2px solid black;
     margin-left: 88px;
-    width: 150px;
+    width: 180px;
     height: 25px;
 }
 
 #address1 {
+    border: 2px solid black;
     margin-left: 66px;
-    width: 300px;
+    width: 350px;
     height: 70px;
 }
 
@@ -67,5 +74,89 @@ label {
 }
 
 #btn1 {
+   margin-top:10px;
     text-align: center;
+}
+#a1{
+    margin-left:30px;
+}
+#d1{
+
+    margin-left:-244px;
+}
+#s1 {
+    position:relative;
+    right:-260px;
+    margin-right:10px;
+    margin-left: 10px;
+}
+#c1 {
+    position: relative;
+    right: -240px;
+    margin-left: 10px;
+}
+
+#frt1 {
+    margin-bottom: 20px;
+}
+
+#lst1 {
+    margin-bottom: 20px;
+}
+
+#gnd1 {
+    margin-bottom: 20px;
+}
+
+#combo1 {
+    display: inline-flex;
+    margin-bottom: 20px;
+    
+}
+
+#cts1 {
+    margin-bottom: 20px;
+}
+#ads1 {
+    margin-bottom: 20px;
+}
+#first1-error {
+    font-size: 12px;
+ 
+    color: red;
+ 
+   margin-left:186px;
+}
+#last1-error {
+    font-size: 12px;
+    
+    color: red;
+
+    margin-left: 186px;
+}
+#dob1-error {
+    font-size: 12px;
+    
+    color: red;
+   
+    margin-left: 186px;
+}
+#age-error1 {
+    font-size: 12px;
+ 
+    margin-left: 30px;
+    color: red;
+
+   
+
+
+}
+h2{
+    text-align:center;
+}
+#date-error1 {
+    margin-top:27px;
+    font-size: 12px;
+    color: red;
+    margin-left: 186px;
 }
