@@ -60,7 +60,7 @@ label {
 
 #address1 {
     border: 2px solid black;
-    margin-left: 66px;
+    margin-left: 187px;
     width: 350px;
     height: 70px;
 }
@@ -159,4 +159,9 @@ h2{
     font-size: 12px;
     color: red;
     margin-left: 186px;
+}
+#addlabel1 {
+    position: absolute;
+    top: 399px;
+    right: 783px;
 }

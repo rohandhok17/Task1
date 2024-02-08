@@ -19,7 +19,7 @@ namespace StudentManagement
         {
             return students;
         }
-
+        public static List<Student> GetStudentsAll() => students;
 
         public static void AddStudent(Student student)
         {

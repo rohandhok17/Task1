@@ -102,7 +102,7 @@ tr {
 
 
 #userTable tr {
-    max-height: 40px; /* Set the desired height for your rows */
+    max-height: 20px; /* Set the desired height for your rows */
 }
 
     #userTable tr.default-color {

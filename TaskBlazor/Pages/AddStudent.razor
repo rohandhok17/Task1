@@ -11,13 +11,13 @@
   
     <div id="frt">
          <label for="firstName">FirstName<span id="re"> *</span></label>
-            <InputText id="firstName" @bind-Value="student.FirstName" placeholder="Please enter First Name" onkeydown="return /[a-zA-Z ]/i.test(event.key)"  ></InputText>
+            <InputText id="firstName" @bind-Value="student.FirstName" placeholder="Please enter First Name" onkeydown="return /[a-zA-Z ]/i.test(event.key)" maxlength="15" minlength="3"></InputText>
             <div><ValidationMessage For="@(()=>student.FirstName)" id="first-error" /> </div>
            
     </div>
     <div id="lst">
             <label for="lastName">LastName<span id="re"> *</span></label>
-            <InputText id="lastName" @bind-Value="student.LastName" placeholder="Please enter Last Name" onkeydown="return /[a-zA-Z ]/i.test(event.key)" oninvalid="ValidatiionLastName"></InputText>
+            <InputText id="lastName" @bind-Value="student.LastName" placeholder="Please enter Last Name" onkeydown="return /[a-zA-Z ]/i.test(event.key)" oninvalid="ValidatiionLastName" maxlength="18" minlength="2"></InputText>
     
             <div><ValidationMessage For="@(()=>student.LastName)" id="last-error" /></div>
 
@@ -34,11 +34,11 @@
         </div>
         <div id="combo">
                 <label for="dob">DateOfBirth<span id="re"> *</span></label>
-            <InputDate id="dob" @bind-Value="@student.DateOfBirth" @bind-Value:format="dd/MM/yyyy" @oninput="UpdateAge" />
+            <InputDate id="dob" @bind-Value="@student.DateOfBirth" min="@DateTime.Now.ToString("1924-1-1")" max="@DateTime.Now.ToString("2024-12-31")" @oninput="UpdateAge" />
             <ValidationMessage For="@(()=>student.DateOfBirth)" id="dateofbirth-error" />
                 <div id="ag1">
                     <label for="age">Age<span id="re"> *</span></label>
-                <InputNumber id="age" @bind-Value="student.Age" @oninput="UpdateDateOfBirth"></InputNumber>
+                <InputNumber min="0" max="99" id="age" @bind-Value="student.Age" @oninput="UpdateDateOfBirth"></InputNumber>
                 <small>years</small>
                     <ValidationMessage   For="@(()=>student.Age)" id="error-age" />
                 </div>
@@ -50,10 +50,11 @@
             <InputText id="class" @bind-Value="student.Class" placeholder="Please enter class"></InputText>
     </div>
     <div id="ads">
-        <label for="address">Address</label>
+        <label id="adslabel" for="address">Address</label>
             <InputTextArea id="address" @bind-Value="student.Address" placeholder="Please enter address"></InputTextArea>
     </div>
         <div id="btn">
+
             <button id="save" type="submit" class="btn btn-primary">Save</button>
             <button id="cancel"type="button" @onclick="CancelStudent" class="btn btn-secondary">Cancel</button>
          
@@ -124,52 +125,63 @@
     {
         NavigationManager.NavigateTo("/");
     }
-    private void UpdateAge(ChangeEventArgs args)
+    private void UpdateAge(ChangeEventArgs e)
     {
-        if (DateTime.TryParse(args.Value?.ToString(), out DateTime selectedDate))
+        try
         {
-            student.Age = CalculateAge(selectedDate);
+            if (DateTime.TryParse(e.Value.ToString(), out var dateOfBirth))
+            {
+                student.DateOfBirth = dateOfBirth;
+                student.Age = DateTime.Now.Year - dateOfBirth.Year;
+            }
         }
+        catch (Exception ex) { }
+
     }
 
-    private void UpdateDateOfBirth(ChangeEventArgs args)
+    private void UpdateDateOfBirth(ChangeEventArgs e)
     {
-        if (int.TryParse(args.Value?.ToString(), out int enteredAge))
+        try
         {
-            student.DateOfBirth = CalculateDateOfBirth(enteredAge);
+            if (int.TryParse(e.Value.ToString(), out var age))
+            {
+                student.Age = age;
+                student.DateOfBirth = DateTime.Now.AddYears(-age);
+            }
         }
+        catch (Exception ex) { }
     }
 
     // Assuming you are using a UI framework, update the binding to use a nullable int
-    private int? CalculateAge(DateTime birthDate)
-    {
-        DateTime currentDate = DateTime.Now;
-        int age = currentDate.Year - birthDate.Year;
+    // private int? CalculateAge(DateTime birthDate)
+    // {
+    //     DateTime currentDate = DateTime.Now;
+    //     int age = currentDate.Year - birthDate.Year;
 
-        if (currentDate.Month < birthDate.Month || (currentDate.Month == birthDate.Month && currentDate.Day < birthDate.Day))
-        {
-            age--;
-        }
+    //     if (currentDate.Month < birthDate.Month || (currentDate.Month == birthDate.Month && currentDate.Day < birthDate.Day))
+    //     {
+    //         age--;
+    //     }
 
-        return age;
-    }
+    //     return age;
+    // }
 
-    private DateTime CalculateDateOfBirth(int? age)
-    {
-        if (!age.HasValue || age <= 0)
-        {
-            // Handle the case where age is not entered or is not valid
-            // You may choose to return DateTime.MinValue or some default value
-            return DateTime.MinValue;
-        }
+    // private DateTime CalculateDateOfBirth(int? age)
+    // {
+    //     if (!age.HasValue || age <= 0)
+    //     {
+    //         // Handle the case where age is not entered or is not valid
+    //         // You may choose to return DateTime.MinValue or some default value
+    //         return DateTime.MinValue;
+    //     }
 
-        DateTime currentDate = DateTime.Now;
-        int birthYear = currentDate.Year - age.Value;
+    //     DateTime currentDate = DateTime.Now;
+    //     int birthYear = currentDate.Year - age.Value;
 
-        DateTime dateOfBirth = new DateTime(birthYear, 1, 1);
+    //     DateTime dateOfBirth = new DateTime(birthYear, 1, 1);
 
-        return dateOfBirth;
-    }
+    //     return dateOfBirth;
+    // }
 
 
    

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using StudentManagement;
 
 namespace MauiAppStudent
 {
@@ -17,7 +18,9 @@ namespace MauiAppStudent
 
 #if DEBUG
     		builder.Logging.AddDebug();
-#endif
+            builder.Services.AddSingleton<StudentService>();
+            builder.Services.AddSingleton<Student>();
+#endif      
 
             return builder.Build();
         }

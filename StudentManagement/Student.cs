@@ -15,7 +15,7 @@ namespace StudentManagement
         public string FirstName { get; set; }
       
       
-        [Required(ErrorMessage = "This Filed is required"), RegularExpression(@"^(?=(?:.*[^\s]){3})\s*\S(?:\s*\S){2,}\s*$", ErrorMessage = "FirstName must be between 2 and 18 letters"),]
+        [Required(ErrorMessage = "This Filed is required"), RegularExpression(@"^\s*\S(.|\s)*\S\s*$", ErrorMessage = "FirstName must be between 2 and 18 letters"),]
 
         public string LastName { get; set; }
       
@@ -25,7 +25,7 @@ namespace StudentManagement
         [Required(ErrorMessage = "This Field is required")]
         
         [ValidationDateOfBirth(ErrorMessage ="This Field is required")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
        
         [Required(ErrorMessage = "This Field is required")]
         [Range(5, 99, ErrorMessage = "Age must be between 5 and 99")]
