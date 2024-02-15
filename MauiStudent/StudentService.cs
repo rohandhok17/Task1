@@ -14,16 +14,25 @@ namespace MauiStudent
                new Student { Id = 2,FirstName="Rahul",LastName="Guru",Gender="Male",DateOfBirth=new DateTime(1995,5,10),Age=25,Class="10th",Address="Wardha" }
 
         };
-        public static List<Student> GetStudents()
+        public static List<Student> GetStudentsAll()
         {
             return students;
         }
-        public static List<Student> GetStudentsAll() => students;
+        //public static List<Student> GetStudentsAll() => students;
 
         public static void AddStudent(Student student)
         {
-            student.Id = students.Max(student => student.Id) + 1;
-            students.Add(student);
+            Student StTrim = new()
+            {
+                FirstName = student.FirstName.Trim(),
+                LastName = student.LastName.Trim(),
+                Gender = student.Gender.Trim(),
+                DateOfBirth = student.DateOfBirth,
+                Age = student.Age,
+                Class = student.Class.Trim(),
+                Address = student.Address.Trim(),
+            };
+            students.Add(StTrim);
         }
         public static Student GetStudent(int id)
         {
@@ -34,13 +43,13 @@ namespace MauiStudent
         {
 
             Student exitingStudent = GetStudent(updateStudent.Id);
-            exitingStudent.FirstName = updateStudent.FirstName.Trim();
-            exitingStudent.LastName = updateStudent.LastName.Trim();
+            exitingStudent.FirstName = updateStudent.FirstName;
+            exitingStudent.LastName = updateStudent.LastName;
             exitingStudent.Gender = updateStudent.Gender;
             exitingStudent.Age = updateStudent.Age;
             exitingStudent.DateOfBirth = updateStudent.DateOfBirth;
-            exitingStudent.Class = updateStudent.Class.Trim();
-            exitingStudent.Address = updateStudent.Address.Trim();
+            exitingStudent.Class = updateStudent.Class;
+            exitingStudent.Address = updateStudent.Address;
         }
 
         public static void DeleteStudent(int id)

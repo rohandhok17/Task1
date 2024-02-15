@@ -9,7 +9,7 @@ namespace StudentManagement
 
     public class StudentService
     {
-        private static readonly List<Student> students = new()
+        private static  List<Student> students = new()
         {
            new Student { Id = 1,FirstName="Rohan",LastName="Dhok",Gender="Male",DateOfBirth=new DateTime(2000,4,4),Age=34,Class="12th",Address="Wardha" },
                new Student { Id = 2,FirstName="Rahul",LastName="Guru",Gender="Male",DateOfBirth=new DateTime(1995,5,10),Age=25,Class="10th",Address="Wardha" }
