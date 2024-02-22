@@ -7,9 +7,12 @@ namespace MauiStudent
         public AppShell()
         {
             InitializeComponent();
+            
+           //NavigationPage.SetHasBackButton(this, false);
+          //  NavigationPage.SetHasNavigationBar(this, false);
             Routing.RegisterRoute(nameof(AddStudent),typeof(AddStudent));
-            Routing.RegisterRoute(nameof(EditStudent), typeof(EditStudent));
-            Routing.RegisterRoute(nameof(OurStudent), typeof(OurStudent));
+           Routing.RegisterRoute(nameof(EditStudent), typeof(EditStudent));
+           Routing.RegisterRoute(nameof(OurStudent), typeof(OurStudent));
         }
         
     }

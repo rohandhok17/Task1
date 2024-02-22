@@ -33,7 +33,7 @@ namespace MauiStudent
         [Required(ErrorMessage = "This Field is required")]
         [Range(5, 99, ErrorMessage = "Age must be between 5 and 99")]
         [RegularExpression(@"^\d{2}$", ErrorMessage = "Age must be between 5 and 99")]
-        public int? Age { get; set; }
+        public int Age { get; set; }
         public string Class { get; set; }
         public string Address { get; set; }
 

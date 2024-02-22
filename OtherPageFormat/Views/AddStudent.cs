@@ -1,8 +1,8 @@
-namespace MauiStudent.Models;
+namespace OtherPageFormat.Views;
 
-public class NewPage1 : ContentPage
+public class AddStudent : ContentView
 {
-	public NewPage1()
+	public AddStudent()
 	{
 		Content = new VerticalStackLayout
 		{

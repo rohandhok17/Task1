@@ -1,6 +1,7 @@
 using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Windows.Forms;
+using StudentManagement;
 
 namespace Task1
 {

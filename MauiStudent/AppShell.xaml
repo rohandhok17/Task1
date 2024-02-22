@@ -6,9 +6,7 @@
     xmlns:local="clr-namespace:MauiStudent"
     xmlns:models="clr-namespace:MauiStudent.Models"
     Shell.FlyoutBehavior="Disabled"
-    Title="Student"
-    TitleColor="White"
-    BackgroundColor="#498BA3">
+    Title="Student">
 
     <ShellContent
         ContentTemplate="{DataTemplate models:OurStudent}"

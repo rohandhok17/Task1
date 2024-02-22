@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging.Abstractions;
 using StudentManagement;
 using System.Collections.ObjectModel;
+using StudentManagement;
 //using static System.Net.Mime.MediaTypeNames;
 
 namespace MauiStudent.Models;
@@ -14,38 +15,14 @@ public class EditStudent : ContentPage
     private Entry EAge;
     private Entry EClass;
     private Entry EAddress;
-    int CalculateAge(DateTime dateOfBirth)
-    {
-        DateTime currentDate = DateTime.Now;
-        int age = currentDate.Year - dateOfBirth.Year;
-
-        
-        if (currentDate < dateOfBirth.AddYears(age))
-        {
-            age--;
-        }
-
-        return age;
-    }
-
-   
-    DateTime CalculateDateOfBirth(int age)
-    {
-        DateTime currentDate = DateTime.Now;
-        int yearOfBirth = currentDate.Year - age;
-
- 
-        DateTime dateOfBirth = new DateTime(yearOfBirth, 1, 1);
-
-        return dateOfBirth;
-    }
+    
     public EditStudent(int id)
-	{
-        
+    {
+
         Title = "EditStudent";
         Student studentToEdit = StudentService.GetStudent(id);
 
-        
+
         Border border = new Border
         {
 
@@ -65,8 +42,8 @@ public class EditStudent : ContentPage
         };
         Label firstname = new Label
         {
-            
-            Text="FirstName"
+
+            Text = "FirstName"
 
 
         };
@@ -101,8 +78,9 @@ public class EditStudent : ContentPage
                 FontSize = 14,
                 FontAttributes = FontAttributes.Bold
             }
+           
         };
-       
+
         Entry Elast = new Entry
         {
             Text = studentToEdit.LastName,
@@ -161,19 +139,19 @@ public class EditStudent : ContentPage
                 FontAttributes = FontAttributes.Bold
             }
         };
-     
+
 
         DatePicker datePicker = new DatePicker
         {
-            
+
             MinimumDate = new DateTime(1924, 1, 1),
             MaximumDate = new DateTime(2024, 12, 31),
-            Format="dd-MM-yyyy",
-            Date =studentToEdit.DateOfBirth??DateTime.Now,
-            
+            Format = "dd-MM-yyyy",
+            Date = studentToEdit.DateOfBirth.Value
+
         };
         
-       
+
 
         Border Age = new Border
         {
@@ -193,29 +171,15 @@ public class EditStudent : ContentPage
             }
         };
 
-        
+
         Entry EAge = new Entry
         {
-            Text = studentToEdit.Age?.ToString(),
+            Text = studentToEdit.Age.ToString(),
             Keyboard = Keyboard.Numeric,
             Placeholder = "Enter Age",
             MaxLength = 2
         };
-        EAge.TextChanged += (sender, e) =>
-        {
-            if (!string.IsNullOrEmpty(EAge.Text))
-            {
-                int enteredAge = Convert.ToInt32(EAge.Text);
-                DateTime calculatedDateOfBirth = CalculateDateOfBirth(enteredAge);
-                datePicker.Date = calculatedDateOfBirth;
-            }
-        };
-        datePicker.DateSelected += (sender, e) =>
-        {
-            DateTime selectedDate = e.NewDate;
-            int age = CalculateAge(selectedDate);
-            EAge.Text = age.ToString();
-        };
+        
         Border Class = new Border
         {
 
@@ -267,10 +231,38 @@ public class EditStudent : ContentPage
 
 
         //};
-        Entry EAddress = new Entry
-        {Text = studentToEdit.Address,
+        Editor EAddress = new Editor
+        {
+            Text = studentToEdit.Address,
             Placeholder = "Please Enter Address",
             HeightRequest = 50
+        };
+        datePicker.DateSelected += (sender, e) =>
+        {
+
+            int age = DateTime.Now.Year - e.NewDate.Year;
+
+
+            if (DateTime.Now.DayOfYear < e.NewDate.DayOfYear)
+            {
+                age--;
+            }
+
+
+            EAge.Text = age.ToString();
+        };
+
+
+        EAge.TextChanged += (sender, e) =>
+        {
+            if (int.TryParse(EAge.Text, out int age))
+            {
+
+                DateTime birthdate = DateTime.Now.AddYears(-age);
+
+
+                datePicker.Date = birthdate;
+            }
         };
         Button Save = new Button
         {
@@ -283,38 +275,30 @@ public class EditStudent : ContentPage
         };
         Save.Clicked += (sender, e) =>
         {
-            //
-           // // Validate input fields before saving
-           //if (string.IsNullOrWhiteSpace(Efirst.Text) || string.IsNullOrWhiteSpace(Elast.Text) ||
-           //     picker.SelectedItem == null || datePicker.Date == null ||
-           //     string.IsNullOrWhiteSpace(EClass.Text) || string.IsNullOrWhiteSpace(EAddress.Text))
-           // {
-               
-           //     return;
-           // }
-
             
+
+
             studentToEdit.FirstName = Efirst.Text.Trim();
             studentToEdit.LastName = Elast.Text.Trim();
             studentToEdit.Gender = picker.SelectedItem.ToString().Trim();
             studentToEdit.DateOfBirth = datePicker.Date;
-            studentToEdit.Age = string.IsNullOrEmpty(EAge?.Text) ? 0 : Convert.ToInt32(EAge.Text);
-            studentToEdit.Class = EClass.Text.Trim();
-            studentToEdit.Address = EAddress.Text.Trim();
+            studentToEdit.Age = int.Parse(EAge.Text.Trim());
+            studentToEdit.Class = EClass.Text.Trim() ?? string.Empty;
+            studentToEdit.Address = EAddress.Text.Trim() ?? string.Empty;
 
             try
             {
-               
+
                 StudentService.UpdateStudent(studentToEdit);
 
-                
+
                 Navigation.PushAsync(new OurStudent());
-              
+
             }
             catch (Exception ex)
             {
-              
-              
+
+
             }
 
         };
@@ -323,7 +307,7 @@ public class EditStudent : ContentPage
             Background = Colors.Gray,
             FontSize = 20,
             Margin = 5,
-            TextColor=Colors.Red,
+            TextColor = Colors.Red,
             Text = "Delete",
 
 
@@ -334,17 +318,17 @@ public class EditStudent : ContentPage
 
             if (confirmed)
             {
-               
+
                 if (id != null)
                 {
                     StudentService.DeleteStudent(id);
 
-                   
+
                     Navigation.PushAsync(new OurStudent());
                 }
                 else
                 {
-                  
+
                     await DisplayAlert("Error", "Student ID is null", "OK");
                 }
             }
@@ -357,8 +341,7 @@ public class EditStudent : ContentPage
             FontSize = 20,
             Margin = 5,
             Text = "Cancel",
-            VerticalOptions = LayoutOptions.Center,
-            HorizontalOptions = LayoutOptions.Center,
+           
 
         };
 
@@ -367,12 +350,12 @@ public class EditStudent : ContentPage
             Navigation.PushAsync(new OurStudent());
 
         };
-       
-        StackLayout stackLayout =new StackLayout 
-        
+
+        StackLayout stackLayout = new StackLayout
+
         {
             Children = {
-             border,Efirst,lastname,Elast,gender,picker,Dateofbirth,datePicker,Age,EAge ,Class,EClass,Address,EAddress,Save,Delete
+             border,Efirst,lastname,Elast,gender,picker,Dateofbirth,datePicker,Age,EAge ,Class,EClass,Address,EAddress,Save,Delete,Cancel
             }
 
 
@@ -385,9 +368,9 @@ public class EditStudent : ContentPage
 
         Content = scrollView;
 
-       
+
 
     }
-    
-    
+
+
 }
